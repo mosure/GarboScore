@@ -1,0 +1,23 @@
+{
+    "extends": ["tslint:latest", "tslint-react"],
+    "rules": {
+        "jsx-no-multiline-js": false,
+        "jsx-wrap-multiline": false,
+        "object-literal-sort-keys": false,
+        "quotemark": [true, "single", "jsx-single"],
+        "member-access": false,
+        "ordered-imports": false,
+        "jsx-boolean-value": false,
+        "variable-name": {
+            "options": [
+                "allow-leading-underscore",
+                "ban-keywords",
+                "check-format",
+                "allow-pascal-case"
+            ]
+        },
+        "no-submodule-imports": false,
+        "interface-name": false,
+        "object-literal-key-quotes": false
+    }
+}

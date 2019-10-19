@@ -6,74 +6,57 @@ const MONGODB_NAME: string = process.env.MONGODB_NAME || '';
 
 const COLLECTION_NAME = 'addresses';
 
-const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true });
+const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const getMongoDB = (callback: (db: Db) => void) => {
-    mongoClient.connect(() => {
+const getMongoDB = (callback: (db?: Db) => void) => {
+    mongoClient.connect((err) => {
+        if (err) {
+            callback();
+            return;
+        }
+
         const db = mongoClient.db(MONGODB_NAME);
-
-        setupIndex(db);
 
         callback(db);
       
-        mongoClient.close().then().catch();
+        mongoClient.close().then(() => console.log('CLOSED')).catch((error) => console.log('ERROR Closing: ' + JSON.stringify(error)));
     });
 };
 
-// Setup index
-const setupIndex = (db: Db) => {
-    db.collection(COLLECTION_NAME).createIndex({
-        'address': 1 
-    }).then().catch();
-};
-
-class SubmissionInterface {
-    address: string = '';
-    image: string = '';
-}
-
-const submissionValidator = new SubmissionInterface();
-
-const stripProperties = (obj: any, template: any) => {
-    for (const key in obj) {
-        if (!template[key]) {
-            delete obj[key];
-        }
-    }
-
-    return obj;
-};
-
 export const score = functions.https.onRequest((request, response) => {
-    if (request.method === 'POST') {
-        if (!(request.body instanceof SubmissionInterface)) {
-            response.status(400).send('Body must be of type: { address: string, image: string }');
-        }
-
-        const submission: SubmissionInterface = stripProperties(request.body, submissionValidator);
-
-        // TODO: Get a score from the ML
-        // This should either be an array of scores or cumulative score
-        const submissionScore = 0;
-
-        getMongoDB((db: Db) => {
-            const collection = db.collection(COLLECTION_NAME);
-    
-            collection.updateOne({
-                address: submission.address,
-            }, {
-                '$set': {
-                    score: submissionScore
-                },
-            }, {
-                upsert: true,
-            }).then().catch();
-
-            response.status(201).send({ score: submissionScore });
-        });
-
+    if (request.method !== 'POST') {
+        response.status(200).send('Use a POST instead!');
         return;
     }
 
-    response.status(404).send();
+    if (!request.body['address'] || !request.body['image']) {
+        response.status(400).send('Body must be of type: { address: string, image: string }');
+        return;
+    }
+
+    // TODO: Get a score from the ML
+    // This should either be an array of scores or cumulative score
+    const submissionScore = 0;
+
+    getMongoDB((db?: Db) => {
+        if (!db) {
+            response.status(500).send('Could not connect to MongoDB.');
+            return;
+        }
+
+        const collection = db.collection(COLLECTION_NAME);
+
+        collection.updateOne({
+            address: request.body['address'],
+        }, {
+            '$set': {
+                address: request.body['address'],
+                score: submissionScore,
+            },
+        }, {
+            upsert: true,
+        }).then(() => {
+            response.status(201).send({ score: submissionScore });
+        }).catch((err) => response.status(500).send({ error: err }));
+    });
 });
