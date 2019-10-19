@@ -71,6 +71,8 @@ export const score = functions.https.onRequest((request, response) => {
 
             response.status(201).send({ score: submissionScore });
         });
+
+        return;
     }
 
     response.status(404).send();
