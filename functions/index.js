@@ -5,6 +5,6 @@
  * @param {!express:Response} res HTTP response context.
  */
 exports.score = (req, res) => {
-    let message = req.query.message || req.body.message || 'Hello World NEW2!';
+    let message = req.query.message || req.body.message || 'Hello World NEW3!';
     res.status(200).send(message);
   };
