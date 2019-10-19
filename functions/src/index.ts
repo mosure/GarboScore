@@ -6,11 +6,13 @@ const MONGODB_NAME = process.env.MONGODB_NAME as string;
 
 const COLLECTION_NAME = 'addresses';
 
-const mongoClient = new MongoClient(MONGODB_URL);
+const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true });
 
 const getMongoDB = (callback: (db: Db) => void) => {
     mongoClient.connect(() => {
         const db = mongoClient.db(MONGODB_NAME);
+
+        setupIndex(db);
 
         callback(db);
       
@@ -63,8 +65,6 @@ export const score = functions.https.onRequest((request, response) => {
                 },
             }, {
                 upsert: true,
-            }, () => {
-                setupIndex(db);
             });
 
             response.status(201).send({ score: submissionScore });
