@@ -6,6 +6,6 @@ const Demo: React.FC = () => {
             Demo
         </>
     );
-}
+};
 
 export default Demo;

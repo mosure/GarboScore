@@ -6,6 +6,6 @@ const HeaderMobile: React.FC = () => {
             Header Mobile
         </>
     );
-}
+};
 
 export default HeaderMobile;

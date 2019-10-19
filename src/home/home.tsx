@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '@material-ui/core';
 
 const Home: React.FC = () => {
     return (
@@ -7,6 +6,6 @@ const Home: React.FC = () => {
             Home
         </>
     );
-}
+};
 
 export default Home;

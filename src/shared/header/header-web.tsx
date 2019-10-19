@@ -6,6 +6,6 @@ const HeaderWeb: React.FC = () => {
             Header Web
         </>
     );
-}
+};
 
 export default HeaderWeb;
