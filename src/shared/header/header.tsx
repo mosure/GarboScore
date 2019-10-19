@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         pointer: {
             cursor: 'pointer',
+            color: theme.palette.secondary.main,
         },
         appBar: {
             zIndex: theme.zIndex.modal + 1,
