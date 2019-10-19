@@ -1,8 +1,8 @@
 import * as functions from 'firebase-functions';
 import { MongoClient, Db } from 'mongodb';
 
-const MONGODB_URL = process.env.MONGODB_URL as string;
-const MONGODB_NAME = process.env.MONGODB_NAME as string;
+const MONGODB_URL: string = process.env.MONGODB_URL || '';
+const MONGODB_NAME: string = process.env.MONGODB_NAME || '';
 
 const COLLECTION_NAME = 'addresses';
 
@@ -16,14 +16,16 @@ const getMongoDB = (callback: (db: Db) => void) => {
 
         callback(db);
       
-        mongoClient.close();
+        mongoClient.close().then().catch();
     });
 };
 
 // Setup index
-const setupIndex = (db: Db) => db.collection(COLLECTION_NAME).createIndex({
-    'address': 1 
-});
+const setupIndex = (db: Db) => {
+    db.collection(COLLECTION_NAME).createIndex({
+        'address': 1 
+    }).then().catch();
+};
 
 class SubmissionInterface {
     address: string = '';
@@ -65,7 +67,7 @@ export const score = functions.https.onRequest((request, response) => {
                 },
             }, {
                 upsert: true,
-            });
+            }).then().catch();
 
             response.status(201).send({ score: submissionScore });
         });
