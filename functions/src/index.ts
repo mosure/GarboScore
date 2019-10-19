@@ -75,5 +75,5 @@ export const score = functions.https.onRequest((request, response) => {
         return;
     }
 
-    response.status(404).send('Use a POST instead!');
+    response.status(200).send('Use a POST instead!');
 });
