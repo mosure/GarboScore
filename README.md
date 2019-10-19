@@ -3,8 +3,6 @@ MadHacks Carbon - Fall 2019 Sustainability SaaS
 
 [Visit our site!](https://www.garboscore.tech)
 
----
-
 ## What is it?
 Using machine learning and object detection, given an X-Ray of garbage, our system scores the garbage based on the number of recyclable items that should not be going to a landfill. In theory, if garbage collection trucks implemented an 'imaging' step inside of the truck, this system could rate addresses/households based on what they are throwing away. A city could implement a 'sustainability tax break' where households are incentivized to properly recycle.
 
