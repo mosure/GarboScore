@@ -5,15 +5,19 @@ import {
     Toolbar,
     AppBar,
     Slide,
-    Hidden,
     useScrollTrigger,
+    Button,
+    Grid,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import HeaderMobile from './header-mobile';
-import HeaderWeb from './header-web';
+import { headerData } from '../../data';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
+        grid: {
+            width: '100%',
+        },
         pointer: {
             cursor: 'pointer',
             color: theme.palette.secondary.main,
@@ -40,25 +44,35 @@ const HideOnScroll: React.FC = (props) => {
     });
 };
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
     const classes = useStyles();
     return (
         <HideOnScroll>
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                    <div className={classes.pointer}>
-                        Logo
-                    </div>
-                    <Hidden mdUp>
-                        <HeaderMobile/>
-                    </Hidden>
-                    <Hidden smDown>
-                        <HeaderWeb/>
-                    </Hidden>
+                    <Grid
+                        container
+                        justify='space-between'
+                        alignItems='center'
+                        className={classes.grid}
+                    >
+                        <Grid item>
+                            <div className={classes.pointer}>
+                                Logo
+                            </div>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                component={Link}
+                                to={headerData.button.link}
+                                variant='outlined'
+                            >
+                                {headerData.button.text}
+                            </Button>
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
         </HideOnScroll>
     );
 };
-
-export default Header;
