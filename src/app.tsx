@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect, Route } from 'react-router-dom';
+import { Switch, Redirect, Route, BrowserRouter } from 'react-router-dom';
 
 import { Header, Footer } from './shared';
 import { Home } from './home';
@@ -8,16 +8,18 @@ import { Demo } from './demo';
 const App: React.FC = () => {
     return (
         <>
-            <Header/>
+            <BrowserRouter>
+                <Header/>
 
-            <Switch>
-                <Route exact path='/' component={Home}/>
-                <Route exact path='/demo' component={Demo}/>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/demo' component={Demo}/>
 
-                <Redirect to='/'/>
-            </Switch>
+                    <Redirect to='/'/>
+                </Switch>
 
-            <Footer/>
+                <Footer/>
+            </BrowserRouter>
         </>
     );
 }
