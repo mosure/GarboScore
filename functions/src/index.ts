@@ -4,6 +4,8 @@ import { MongoClient, Db } from 'mongodb';
 const MONGODB_URL = process.env.MONGODB_URL as string;
 const MONGODB_NAME = process.env.MONGODB_NAME as string;
 
+const COLLECTION_NAME = 'addresses';
+
 const mongoClient = new MongoClient(MONGODB_URL);
 
 const getMongoDB = (callback: (db: Db) => void) => {
@@ -15,6 +17,11 @@ const getMongoDB = (callback: (db: Db) => void) => {
         mongoClient.close();
     });
 };
+
+// Setup index
+const setupIndex = (db: Db) => db.collection(COLLECTION_NAME).createIndex({
+    'address': 1 
+});
 
 class SubmissionInterface {
     address: string = '';
@@ -46,7 +53,7 @@ export const score = functions.https.onRequest((request, response) => {
         const submissionScore = 0;
 
         getMongoDB((db: Db) => {
-            const collection = db.collection('addresses');
+            const collection = db.collection(COLLECTION_NAME);
     
             collection.updateOne({
                 address: submission.address,
@@ -56,6 +63,8 @@ export const score = functions.https.onRequest((request, response) => {
                 },
             }, {
                 upsert: true,
+            }, () => {
+                setupIndex(db);
             });
 
             response.status(201).send({ score: submissionScore });
