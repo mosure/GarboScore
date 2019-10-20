@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) =>
         pointer: {
             cursor: 'pointer',
             color: theme.palette.secondary.main,
+            maxWidth: 48,
         },
         appBar: {
             zIndex: theme.zIndex.modal + 1,
@@ -57,15 +58,19 @@ export const Header: React.FC = () => {
                         className={classes.grid}
                     >
                         <Grid item>
-                            <div className={classes.pointer}>
-                                Logo
-                            </div>
+                            <img
+                                src={headerData.icon.imgSrc}
+                                alt={headerData.icon.imgAlt}
+                                className={classes.pointer}
+                            />
                         </Grid>
                         <Grid item>
                             <Button
                                 component={Link}
                                 to={headerData.button.link}
                                 variant='outlined'
+                                color='secondary'
+                                size='large'
                             >
                                 {headerData.button.text}
                             </Button>
