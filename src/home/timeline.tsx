@@ -115,12 +115,19 @@ export const Timeline: React.FC = () => {
                                     spacing={4}
                                 >
                                     <Grid item>
-                                        <Typography
-                                            variant='body1'
-                                            align={(index % 2 === 0) ? 'right' : 'left'}
-                                        >
-                                            {snapshot.description}
-                                        </Typography>
+                                        {
+                                            (snapshot.element) && snapshot.element()
+                                        }
+                                        {
+                                            (snapshot.description) && (
+                                                <Typography
+                                                    variant='body1'
+                                                    align={(index % 2 === 0) ? 'right' : 'left'}
+                                                >
+                                                    {snapshot.description}
+                                                </Typography>
+                                            )
+                                        }
                                     </Grid>
                                     <Grid item>
                                         <img
