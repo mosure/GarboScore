@@ -62,11 +62,13 @@ export const Header: React.FC = () => {
                         className={classes.grid}
                     >
                         <Grid item>
-                            <img
-                                src={headerData.icon.imgSrc}
-                                alt={headerData.icon.imgAlt}
-                                className={classes.pointer}
-                            />
+                            <Link to={headerData.icon.link}>
+                                <img
+                                    src={headerData.icon.imgSrc}
+                                    alt={headerData.icon.imgAlt}
+                                    className={classes.pointer}
+                                />
+                            </Link>
                         </Grid>
                         <Grid item>
                             <Button

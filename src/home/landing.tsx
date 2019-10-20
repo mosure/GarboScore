@@ -16,6 +16,7 @@ const useStyles = makeStyles(
         title: {
             color: theme.palette.secondary.main,
             marginBottom: 20,
+            marginTop: '15%',
         },
         subtitle: {
             marginBottom: 40,
