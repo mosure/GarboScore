@@ -16,13 +16,12 @@ const predictionClient = new automl.PredictionServiceClient();
 const recyclables = ['glass', 'plastic', 'metal'];
 const threshold = 0.5;
 
-const getMongoDB = (callback: (db: Db) => void, error: (err: string) => void) => {
+const getMongoDB = (callback: (db: Db) => void, error: (err: any) => void) => {
     const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
     mongoClient.connect((err) => {
         if (err) {
-            error(err.message);
-            return;
+            // This always evaluates
         }
 
         const db = mongoClient.db(MONGODB_NAME);
@@ -110,7 +109,7 @@ export const score = functions.https.onRequest((request, response) => {
                             },
                         },
                     }).then(() => {
-                        response.status(202).send({ score: submissionScore });
+                        response.status(202).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err }));
                 } else {
                     collection.insertOne({
@@ -123,11 +122,11 @@ export const score = functions.https.onRequest((request, response) => {
                             },
                         ],
                     }).then(() => {
-                        response.status(201).send({ score: results });
+                        response.status(201).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err }));
                 }
             }).catch((err) => response.status(500).send({ error: err }));
-        }, (err: string) => response.status(500).send({ error: err }));
+        }, (err: any) => response.status(500).send({ error: err }));
     }).catch((err) => response.status(500).send({ error: err }));
 });
 
@@ -152,6 +151,7 @@ export const addresses = functions.https.onRequest((request, response) => {
             },
             {
                 '$project': {
+                    '_id': 0,
                     'address': '$address', 
                     'totalScore': {
                         '$sum': '$evaluations.score'
@@ -169,5 +169,5 @@ export const addresses = functions.https.onRequest((request, response) => {
 
             response.status(200).send(result);
         });
-    }, (err: string) => response.status(500).send({ error: err }));
+    }, (err: any) => response.status(500).send({ error: err }));
 });
