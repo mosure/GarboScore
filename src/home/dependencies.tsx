@@ -8,6 +8,7 @@ import {
     createStyles,
     Link,
 } from '@material-ui/core';
+import posed from 'react-pose';
 
 import { dependencyData } from '../data';
 
@@ -31,6 +32,16 @@ const logDependencyClick = (name: string) => {
         });
     };
 };
+
+const PoseImg = posed.img({
+    hoverable: true,
+    init: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.2,
+    },
+});
 
 export const Dependencies: React.FC = () => {
     const classes = useStyles();
@@ -66,7 +77,7 @@ export const Dependencies: React.FC = () => {
                                     target='_blank'
                                     onClick={logDependencyClick(dependency.imgAlt)}
                                 >
-                                    <img
+                                    <PoseImg
                                         src={dependency.imgSrc}
                                         alt={dependency.imgAlt}
                                     />
