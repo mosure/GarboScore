@@ -112,7 +112,7 @@ export const score = functions.https.onRequest((request, response) => {
                         response.status(202).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err, existing, location: 'updateOne' }));
                 } else {
-                    collection.insertOne({
+                    collection.insert({
                         address: request.body.address,
                         evaluations: [
                             {
