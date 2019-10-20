@@ -110,7 +110,7 @@ export const score = functions.https.onRequest((request, response) => {
                         },
                     }).then(() => {
                         response.status(202).send({ score: submissionScore, result: results, });
-                    }).catch((err) => response.status(500).send({ error: err }));
+                    }).catch((err) => response.status(500).send({ error: err, existing, location: 'updateOne' }));
                 } else {
                     collection.insertOne({
                         address: request.body.address,
@@ -123,11 +123,11 @@ export const score = functions.https.onRequest((request, response) => {
                         ],
                     }).then(() => {
                         response.status(201).send({ score: submissionScore, result: results, });
-                    }).catch((err) => response.status(500).send({ error: err }));
+                    }).catch((err) => response.status(500).send({ error: err, location: 'insertOne' }));
                 }
-            }).catch((err) => response.status(500).send({ error: err }));
-        }, (err: any) => response.status(500).send({ error: err }));
-    }).catch((err) => response.status(500).send({ error: err }));
+            }).catch((err) => response.status(500).send({ error: err, location: 'findOne' }));
+        }, (err: any) => response.status(500).send({ error: err, location: 'getMongoDB' }));
+    }).catch((err) => response.status(500).send({ error: err, location: 'callAutoML' }));
 });
 
 export const addresses = functions.https.onRequest((request, response) => {

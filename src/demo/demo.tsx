@@ -20,6 +20,7 @@ import { computeScore } from '../shared/service';
 import { Presets } from './';
 import { Evaluation } from '../data/demo/scores';
 import { Addresses } from './addresses';
+import { Evaluation as EvalComp } from './evaluation';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -43,6 +44,7 @@ const useStyles = makeStyles(
         },
         container: {
             paddingTop: '32px',
+            paddingBottom: '32px',
         },
         close: {
             padding: theme.spacing(0.5),
@@ -51,6 +53,9 @@ const useStyles = makeStyles(
         error: {
             backgroundColor: theme.palette.error.dark,
             color: 'white',
+        },
+        customViewer: {
+            height: '400px',
         },
     }),
 );
@@ -66,14 +71,30 @@ export const Demo: React.FC = () => {
         score: 0,
     };
 
-    const [state, setState] = useState({
+    const [errState, setErrState] = useState({
         snackBarOpen: false,
         snackBarMessage: '',
+    });
+
+    const [state, setState] = useState({
         evaluation: initializer,
     });
 
     const fileConfirmed = (base64: string) => {
         const address = 'TEST';
+
+        // Set state to the correct response with image
+        const evaluation: Evaluation = {
+            imgAlt: address,
+            imgSrc: base64,
+            isLoaded: false,
+            payload: [],
+            score: 0,
+        };
+
+        setState({
+            evaluation,
+        });
 
         computeScore({
             address,
@@ -84,36 +105,35 @@ export const Demo: React.FC = () => {
                 return;
             }
 
-            // Set state to the correct response with image
-            const evaluation: Evaluation = {
-                imgAlt: address,
-                imgSrc: base64,
-                isLoaded: false,
-                payload: result.result[0],
-                score: result.score,
-            };
+            evaluation.payload = result.result[0].payload;
+            evaluation.score = result.score;
+            evaluation.isLoaded = true;
 
             setState({
-                snackBarOpen: false,
-                snackBarMessage: '',
                 evaluation,
             });
         }).catch(() => snackbarError('Error Processing Image.'));
     };
 
     const snackbarError = (error: string) => {
-        setState({
+        setErrState({
             snackBarOpen: true,
             snackBarMessage: error,
-            evaluation: initializer,
         });
     };
 
     const snackBarClose = () => {
-        setState({
+        setErrState({
             snackBarOpen: false,
             snackBarMessage: '',
-            evaluation: initializer,
+        });
+
+        const evalObj = state.evaluation;
+
+        evalObj.isLoaded = true;
+
+        setState({
+            evaluation: evalObj,
         });
     };
 
@@ -163,6 +183,11 @@ export const Demo: React.FC = () => {
                                 </Button>
                             </ImagePicker>
                         </Grid>
+                        <Grid item className={classes.customViewer}>
+                            <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
+                                <EvalComp {...state.evaluation}/>
+                            </Box>
+                        </Grid>
                     </Grid>
                     <Addresses/>
                 </Container>
@@ -172,7 +197,7 @@ export const Demo: React.FC = () => {
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
-                open={state.snackBarOpen}
+                open={errState.snackBarOpen}
                 autoHideDuration={6000}
                 onClose={snackBarClose}
             >
@@ -188,7 +213,7 @@ export const Demo: React.FC = () => {
                             <Close/>
                         </IconButton>,
                     ]}
-                    message={<span>{state.snackBarMessage}</span>}
+                    message={<span>{errState.snackBarMessage}</span>}
                 />
             </Snackbar>
         </>

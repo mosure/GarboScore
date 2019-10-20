@@ -37,6 +37,7 @@ const colorMapping: ColorMapping = {
 
 export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
     const classes = useStyles(props);
+
     return (
         <Box className={classes.container}>
             <svg
@@ -72,7 +73,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                 }
             </svg>
             {
-                !props.isLoaded && (
+                !props.isLoaded && props.imgSrc && (
                     <LinearProgress
                         color='secondary'
                         className={classes.progressBar}
