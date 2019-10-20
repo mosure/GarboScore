@@ -25,6 +25,16 @@ const useStyles = makeStyles(
     }),
 );
 
+interface ColorMapping {
+    [key: string]: string;
+}
+
+const colorMapping: ColorMapping = {
+    'metal': 'red',
+    'plastic': 'green',
+    'glass': 'blue',
+};
+
 export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
     const classes = useStyles(props);
     return (
@@ -48,7 +58,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                                 fill='black'
                                 key={index}
                                 fillOpacity={0.01}
-                                stroke={obj.imageObjectDetection[0].color || 'blue'}
+                                stroke={colorMapping[obj.displayName.toLowerCase()] || 'blue'}
                                 strokeWidth={0.005}
                                 x={x}
                                 y={y}
