@@ -109,7 +109,7 @@ export const Addresses: React.FC = () => {
                                     Address
                                 </TableCell>
                                 <TableCell align='right'>
-                                    Count
+                                    Number of Runs
                                 </TableCell>
                                 <TableCell align='right'>
                                     Total Score
