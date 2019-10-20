@@ -15,6 +15,9 @@ const predictionClient = new automl.PredictionServiceClient();
 
 const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const recyclables = ['glass', 'plastic', 'metal'];
+const threshold = 0.5;
+
 const getMongoDB = (callback: (db?: Db) => void) => {
     mongoClient.connect((err) => {
         if (err) {
@@ -45,14 +48,28 @@ const callAutoMLAPI = (b64img: string) => {
 
         predictionClient.predict(reqBody)
         .then((responses: any) => {
-            console.log('Got a prediction from AutoML API!', JSON.stringify(responses));
             resolve(responses);
         })
         .catch((err: any) => {
-            console.log('AutoML API Error: ', err);
             reject(err);
         });
     });  
+};
+
+const processResults = (results: any): number => {
+    let result = 0;
+
+    if (results.payload) {
+        for (const item of results.payload) {
+            if (recyclables.indexOf(item.displayName) !== -1) {
+                if (item.imageObjectDetection.score > threshold) {
+                    result++;
+                }
+            }
+        }
+    }
+
+    return result;
 };
 
 export const score = functions.https.onRequest((request, response) => {
@@ -71,7 +88,7 @@ export const score = functions.https.onRequest((request, response) => {
     }
 
     callAutoMLAPI(request.body.image).then((results: any) => {
-        const submissionScore = results.length;
+        const submissionScore = processResults(results);
 
         getMongoDB((db?: Db) => {
             if (!db) {
@@ -80,18 +97,34 @@ export const score = functions.https.onRequest((request, response) => {
             }
     
             const collection = db.collection(COLLECTION_NAME);
-    
-            collection.updateOne({
-                address: request.body.address,
-            }, {
-                '$set': {
-                    address: request.body.address,
-                    score: submissionScore,
-                },
-            }, {
-                upsert: true,
-            }).then(() => {
-                response.status(201).send({ score: results });
+
+            collection.findOne({ address: request.body.address }).then((existing) => {
+                if (existing) {
+                    collection.updateOne({
+                        address: request.body.address,
+                    }, {
+                        '$addToSet': {
+                            evaluations: {
+                                timestamp: Date.now(),
+                                score: submissionScore,
+                            },
+                        },
+                    }).then(() => {
+                        response.status(202).send({ score: results });
+                    }).catch((err) => response.status(500).send({ error: err }));
+                } else {
+                    collection.insertOne({
+                        address: request.body.address,
+                        evaluations: [
+                            {
+                                timestamp: Date.now(),
+                                score: submissionScore,
+                            },
+                        ],
+                    }).then(() => {
+                        response.status(201).send({ score: results });
+                    }).catch((err) => response.status(500).send({ error: err }));
+                }
             }).catch((err) => response.status(500).send({ error: err }));
         });
     }).catch((err) => response.status(500).send({ error: err }));
