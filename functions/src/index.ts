@@ -114,7 +114,7 @@ export const score = functions.https.onRequest((request, response) => {
                             },
                         },
                     }).then(() => {
-                        response.status(202).send({ score: results });
+                        response.status(202).send({ score: submissionScore });
                     }).catch((err) => response.status(500).send({ error: err }));
                 } else {
                     collection.insertOne({
