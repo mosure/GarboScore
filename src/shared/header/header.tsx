@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {
     makeStyles,
     createStyles,
@@ -49,6 +50,22 @@ const HideOnScroll: React.FC = (props) => {
     });
 };
 
+const logImageClick = () => {
+    ReactGA.event({
+        category: 'Image',
+        action: 'Nav: home',
+        label: 'Header',
+    });
+};
+
+const logButtonClick = () => {
+    ReactGA.event({
+        category: 'Button',
+        action: 'Nav: Demo',
+        label: 'Header',
+    });
+};
+
 export const Header: React.FC = () => {
     const classes = useStyles();
     return (
@@ -62,7 +79,10 @@ export const Header: React.FC = () => {
                         className={classes.grid}
                     >
                         <Grid item>
-                            <Link to={headerData.icon.link}>
+                            <Link
+                                to={headerData.icon.link}
+                                onClick={logImageClick}
+                            >
                                 <img
                                     src={headerData.icon.imgSrc}
                                     alt={headerData.icon.imgAlt}
@@ -77,6 +97,7 @@ export const Header: React.FC = () => {
                                 variant='outlined'
                                 color='secondary'
                                 size='large'
+                                onClick={logButtonClick}
                             >
                                 {headerData.button.text}
                             </Button>

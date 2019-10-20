@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {
     Grid,
     Box,
@@ -20,6 +21,16 @@ const useStyles = makeStyles(
         },
     }),
 );
+
+const logDependencyClick = (name: string) => {
+    return () => {
+        ReactGA.event({
+            category: 'Image',
+            action: `Nav: ${name}`,
+            label: 'Dependencies',
+        });
+    };
+};
 
 export const Dependencies: React.FC = () => {
     const classes = useStyles();
@@ -50,7 +61,11 @@ export const Dependencies: React.FC = () => {
                                 item
                                 key={index}
                             >
-                                <Link href={dependency.link} target='_blank'>
+                                <Link
+                                    href={dependency.link}
+                                    target='_blank'
+                                    onClick={logDependencyClick(dependency.imgAlt)}
+                                >
                                     <img
                                         src={dependency.imgSrc}
                                         alt={dependency.imgAlt}

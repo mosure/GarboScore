@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import {
     Grid,
     Typography,
@@ -30,6 +31,14 @@ const useStyles = makeStyles(
         },
     }),
 );
+
+const logDescriptionLink = () => {
+    ReactGA.event({
+        category: 'Link',
+        action: 'National Geographic',
+        label: 'Landing',
+    });
+};
 
 export const Landing: React.FC = () => {
     const classes = useStyles();
@@ -63,6 +72,7 @@ export const Landing: React.FC = () => {
                     According to
                     {' '}
                     <Link
+                        onClick={logDescriptionLink}
                         color='secondary'
                         target='_blank'
                         href='https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/'
