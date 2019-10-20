@@ -10,9 +10,12 @@ import {
     createStyles,
     makeStyles,
     Typography,
+    Grid,
+    IconButton,
 } from '@material-ui/core';
 
 import { getAddresses, AddressResult } from '../shared';
+import { Refresh } from '@material-ui/icons';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -41,7 +44,7 @@ export const Addresses: React.FC = () => {
         value: init,
     });
 
-    useEffect(() => {
+    const refreshTableData = () => {
         getAddresses(page * rowsPerPage, rowsPerPage).then((result) => {
             // tslint:disable-next-line:no-console
             console.log({result});
@@ -49,9 +52,16 @@ export const Addresses: React.FC = () => {
                 setRows({
                     value: result,
                 });
+            } else {
+                // tslint:disable-next-line:no-console
+                console.log('Not array.');
             }
         }).catch();
-    });
+    };
+
+    useEffect(() => {
+        refreshTableData();
+    }, []);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -65,9 +75,19 @@ export const Addresses: React.FC = () => {
     return (
         <>
             <Paper className={classes.paper}>
-                <Typography variant='h4'>
-                    Address Database
-                </Typography>
+                <Grid container justify='space-between'>
+                    <Grid item>
+                        <Typography variant='h4'>
+                            Address Database
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <IconButton color='secondary' onClick={refreshTableData}>
+                            <Refresh/>
+                        </IconButton>
+                    </Grid>
+                </Grid>
+
                 <div className={classes.tableWrapper}>
                     <Table
                         className={classes.table}

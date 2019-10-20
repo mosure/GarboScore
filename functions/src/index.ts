@@ -130,15 +130,22 @@ export const addresses = functions.https.onRequest((request, response) => {
                 '$skip': Number(skip)
             },
             {
-                '$project': {
-                    '_id': 0,
-                    'address': '$address', 
+                '$group': {
+                    '_id': '$address', 
                     'totalScore': {
-                        '$sum': '$evaluations.score'
+                        '$sum': '$score'
                     }, 
                     'count': {
-                        '$size': '$evaluations'
+                        '$sum': 1
                     }
+                }
+            },
+            {
+                '$project': {
+                    '_id': 0, 
+                    'address': '$_id', 
+                    'totalScore': 1, 
+                    'count': 1
                 }
             }
         ]).toArray((err: any, result: any) => {
