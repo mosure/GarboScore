@@ -61,12 +61,12 @@ export const score = functions.https.onRequest((request, response) => {
         return;
     }
 
-    if (!request.body['address'] || !request.body['image']) {
+    if (!request.body || !request.body.address || !request.body.image) {
         response.status(400).send(request.body);
         return;
     }
 
-    callAutoMLAPI(request.body['image']).then((results: any) => {
+    callAutoMLAPI(request.body.image).then((results: any) => {
         const submissionScore = results.length;
 
         getMongoDB((db?: Db) => {
@@ -78,10 +78,10 @@ export const score = functions.https.onRequest((request, response) => {
             const collection = db.collection(COLLECTION_NAME);
     
             collection.updateOne({
-                address: request.body['address'],
+                address: request.body.address,
             }, {
                 '$set': {
-                    address: request.body['address'],
+                    address: request.body.address,
                     score: submissionScore,
                 },
             }, {
