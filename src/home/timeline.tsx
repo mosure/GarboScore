@@ -19,7 +19,7 @@ const useStyles = makeStyles(
         },
         stepHeader: {
             scrollMarginTop: 32,
-            marginBottom: 32,
+            marginBottom: 8,
             userSelect: 'none',
         },
         snapshotHeader: {
