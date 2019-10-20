@@ -62,9 +62,10 @@ export const Landing: React.FC = () => {
                     &nbsp;
                     <Link
                         color='secondary'
+                        target='_blank'
                         href='https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/'
                     >
-                        National Geographic
+                        National Geographic,
                     </Link>
                     &nbsp;
                     91% of plastics are not recycled.
