@@ -152,6 +152,7 @@ export const addresses = functions.https.onRequest((request, response) => {
             },
             {
                 '$project': {
+                    '_id': 0,
                     'address': '$address', 
                     'totalScore': {
                         '$sum': '$evaluations.score'
