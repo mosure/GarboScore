@@ -96,38 +96,16 @@ export const score = functions.https.onRequest((request, response) => {
         getMongoDB((db: Db) => {
             const collection = db.collection(COLLECTION_NAME);
 
-            collection.findOne({ address: request.body.address }).then((existing) => {
-                const timestamp = Date.now();
+            const timestamp = Date.now();
 
-                if (existing) {
-                    collection.updateOne({
-                        address: request.body.address,
-                    }, {
-                        '$addToSet': {
-                            evaluations: {
-                                timestamp,
-                                score: submissionScore,
-                                //result: results,
-                            },
-                        },
-                    }).then(() => {
-                        response.status(202).send({ score: submissionScore, result: results, });
-                    }).catch((err) => response.status(500).send({ error: err, existing, location: 'updateOne' }));
-                } else {
-                    collection.insert({
-                        address: request.body.address,
-                        evaluations: [
-                            {
-                                timestamp,
-                                score: submissionScore,
-                                //result: results,
-                            },
-                        ],
-                    }).then(() => {
-                        response.status(201).send({ score: submissionScore, result: results, });
-                    }).catch((err) => response.status(500).send({ error: err, location: 'insertOne' }));
-                }
-            }).catch((err) => response.status(500).send({ error: err, location: 'findOne' }));
+            collection.insertOne({
+                address: request.body.address,
+                timestamp,
+                score: submissionScore,
+                result: results,
+            }).then(() => {
+                response.status(201).send({ score: submissionScore, result: results, });
+            }).catch((err) => response.status(500).send({ error: err, location: 'insertOne' }));
         }, (err: any) => response.status(500).send({ error: err, location: 'getMongoDB' }));
     }).catch((err) => response.status(500).send({ error: err, location: 'callAutoML' }));
 });
