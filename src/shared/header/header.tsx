@@ -17,11 +17,15 @@ const useStyles = makeStyles((theme) =>
     createStyles({
         grid: {
             width: '100%',
+            paddingRight: 20,
         },
         pointer: {
             cursor: 'pointer',
             color: theme.palette.secondary.main,
             maxWidth: 48,
+            [theme.breakpoints.down('sm')]: {
+                maxWidth: 36,
+            },
         },
         appBar: {
             zIndex: theme.zIndex.modal + 1,
