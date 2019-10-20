@@ -97,28 +97,30 @@ export const score = functions.https.onRequest((request, response) => {
             const collection = db.collection(COLLECTION_NAME);
 
             collection.findOne({ address: request.body.address }).then((existing) => {
+                const timestamp = Date.now();
+
                 if (existing) {
                     collection.updateOne({
                         address: request.body.address,
                     }, {
                         '$addToSet': {
                             evaluations: {
-                                timestamp: Date.now(),
+                                timestamp,
                                 score: submissionScore,
-                                result: results,
+                                //result: results,
                             },
                         },
                     }).then(() => {
                         response.status(202).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err, existing, location: 'updateOne' }));
                 } else {
-                    collection.insertOne({
+                    collection.insert({
                         address: request.body.address,
                         evaluations: [
                             {
-                                timestamp: Date.now(),
+                                timestamp,
                                 score: submissionScore,
-                                result: results,
+                                //result: results,
                             },
                         ],
                     }).then(() => {
