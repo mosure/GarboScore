@@ -19,6 +19,8 @@ export const computeScore = (submission: ScoreBody) => {
     // open the request with the verb and the url
     xhr.open('POST', window.location.protocol + '//' + window.location.host + '/api/score');
 
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+
     // send the request
     xhr.send(JSON.stringify({
         address: submission.address,
