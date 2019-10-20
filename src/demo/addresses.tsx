@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import ReactGA from 'react-ga';
 import {
     Paper,
@@ -45,7 +45,7 @@ export const Addresses: React.FC = () => {
         value: init,
     });
 
-    const refreshTableData = () => {
+    const refreshTableData = useCallback(() => {
         getAddresses(page * rowsPerPage, rowsPerPage).then((result) => {
             // tslint:disable-next-line:no-console
             console.log({result});
@@ -58,7 +58,7 @@ export const Addresses: React.FC = () => {
                 console.log('Not array.');
             }
         }).catch();
-    };
+    }, [setRows, page, rowsPerPage]);
 
     const logRefreshButton = () => {
         ReactGA.event({
@@ -69,7 +69,7 @@ export const Addresses: React.FC = () => {
         refreshTableData();
     };
 
-    useEffect(() => {
+    useMemo(() => {
         refreshTableData();
     }, [refreshTableData]);
 

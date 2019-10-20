@@ -110,11 +110,6 @@ export const Demo: React.FC = () => {
             address,
             image: base64.split(',')[1], // Strip out the type
         }).then((result) => {
-            if (!result.result || result.result.length === 0) {
-                snackbarError('Error Processing Image.');
-                return;
-            }
-
             evaluation.payload = result.result[0].payload;
             evaluation.score = result.score;
             evaluation.isLoaded = true;
