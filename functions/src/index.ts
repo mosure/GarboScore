@@ -124,23 +124,30 @@ export const addresses = functions.https.onRequest((request, response) => {
 
         collection.aggregate([
             {
-                '$limit': Number(limit)
+                '$group': {
+                    '_id': '$address', 
+                    'totalScore': {
+                        '$sum': '$score'
+                    }, 
+                    'count': {
+                        '$sum': 1
+                    }
+                }
+            },
+            {
+                '$project': {
+                    '_id': 0, 
+                    'address': '$_id', 
+                    'totalScore': 1, 
+                    'count': 1
+                }
             },
             {
                 '$skip': Number(skip)
             },
             {
-                '$project': {
-                    '_id': 0,
-                    'address': '$address', 
-                    'totalScore': {
-                        '$sum': '$evaluations.score'
-                    }, 
-                    'count': {
-                        '$size': '$evaluations'
-                    }
-                }
-            }
+                '$limit': Number(limit)
+            },
         ]).toArray((err: any, result: any) => {
             if (err) {
                 response.status(500).send({ error: err })
