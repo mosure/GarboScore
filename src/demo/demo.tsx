@@ -54,7 +54,7 @@ const Demo: React.FC = () => {
                 // tslint:disable-next-line:no-console
                 console.log(result);
             },
-            image: base64,
+            image: base64.split(',')[1], // Strip out the type
         });
     };
 
