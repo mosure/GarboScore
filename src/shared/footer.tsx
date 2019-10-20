@@ -1,5 +1,12 @@
 import React from 'react';
-import { Grid, makeStyles, createStyles, Typography, Link } from '@material-ui/core';
+import ReactGA from 'react-ga';
+import {
+    Grid,
+    makeStyles,
+    createStyles,
+    Typography,
+    Link,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -29,6 +36,16 @@ const useStyles = makeStyles((theme) =>
     }),
 );
 
+const logSiteClick = (site: string) => {
+    return () => {
+        ReactGA.event({
+            category: 'Link',
+            action: `Nav: ${site}`,
+            label: 'Footer',
+        });
+    };
+};
+
 const Footer: React.FC = () => {
     const classes = useStyles();
 
@@ -44,13 +61,23 @@ const Footer: React.FC = () => {
             <Grid item>
                 <Typography className={classes.consoleFont} variant='body2'>
                     Built by {' '}
-                    <Link color='secondary' href='https://blenz.dev' target='_blank'>
+                    <Link
+                        color='secondary'
+                        href='https://blenz.dev'
+                        target='_blank'
+                        onClick={logSiteClick('blenz.dev')}
+                    >
                         {'Brady Lenz'}
                     </Link>
                     {' '}
                     and
                     {' '}
-                    <Link color='secondary' href='https://mitchell.mosure.me' target='_blank'>
+                    <Link
+                        color='secondary'
+                        href='https://mitchell.mosure.me'
+                        target='_blank'
+                        onClick={logSiteClick('mitchell.mosure.me')}
+                    >
                         {'Mitchell Mosure'}
                     </Link>
                 </Typography>
