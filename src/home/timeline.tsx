@@ -15,13 +15,16 @@ const useStyles = makeStyles(
         header: {
             margin: 'auto',
             marginBottom: 40,
+            userSelect: 'none',
         },
         stepHeader: {
             scrollMarginTop: 32,
             marginBottom: 32,
+            userSelect: 'none',
         },
         snapshotHeader: {
             color: theme.palette.text.hint,
+            userSelect: 'none',
         },
         paper: {
             padding: 32,
@@ -30,6 +33,7 @@ const useStyles = makeStyles(
         image: {
             height: 300,
             margin: 'auto',
+            userDrag: 'none',
         },
         hr: {
             display: 'flex',

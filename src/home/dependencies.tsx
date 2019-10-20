@@ -14,6 +14,7 @@ const useStyles = makeStyles(
         header: {
             margin: 'auto',
             marginBottom: 40,
+            userSelect: 'none',
         },
     }),
 );

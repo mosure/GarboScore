@@ -18,9 +18,11 @@ const useStyles = makeStyles(
             color: theme.palette.secondary.main,
             marginBottom: 20,
             marginTop: '15%',
+            userSelect: 'none',
         },
         subtitle: {
             marginBottom: 40,
+            userSelect: 'none',
         },
         description: {
             maxWidth: 450,
