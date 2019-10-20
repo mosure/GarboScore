@@ -15,7 +15,7 @@ const useStyles = makeStyles(
             width: '100%',
             height: '100%',
         },
-        spinner: {
+        progressBar: {
             position: 'absolute',
             left: '50%',
             top: '100%',
@@ -45,15 +45,18 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                         const height = obj.imageObjectDetection[0].boundingBox.normalizedVertices[1].y;
                         return (
                             <rect
+                                fill='black'
                                 key={index}
-                                fill='none'
-                                stroke={obj.imageObjectDetection[0].color}
-                                strokeWidth={0.001}
+                                fillOpacity={0.01}
+                                stroke={obj.imageObjectDetection[0].color || 'blue'}
+                                strokeWidth={0.005}
                                 x={x}
                                 y={y}
                                 width={width - x}
                                 height={height - y}
-                            />
+                            >
+                                <title>{`${obj.displayName}: ${Math.round(obj.imageObjectDetection[0].score * 100) / 100}`}</title>
+                            </rect>
                         );
                     })
                 }
@@ -62,7 +65,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                 !props.isLoaded && (
                     <LinearProgress
                         color='secondary'
-                        className={classes.spinner}
+                        className={classes.progressBar}
                     />
                 )
             }
