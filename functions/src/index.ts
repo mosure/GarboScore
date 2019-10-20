@@ -8,20 +8,20 @@ const MONGODB_NAME: string = process.env.MONGODB_NAME || '';
 const COLLECTION_NAME = 'addresses';
 
 const PROJECT_NAME: string = process.env.GCP_PROJECT_NAME || '';
-const REGION = process.env.GCP_REGION || '';
-const AUTO_ML_MODEL = process.env.AUTO_ML_MODEL || '';
+const REGION: string = process.env.GCP_REGION || '';
+const AUTO_ML_MODEL: string = process.env.AUTO_ML_MODEL || '';
 
 const predictionClient = new automl.PredictionServiceClient();
-
-const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const recyclables = ['glass', 'plastic', 'metal'];
 const threshold = 0.5;
 
-const getMongoDB = (callback: (db?: Db) => void) => {
+const getMongoDB = (callback: (db: Db) => void, error: (err: string) => void) => {
+    const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+
     mongoClient.connect((err) => {
         if (err) {
-            callback();
+            error(err.message);
             return;
         }
 
@@ -29,7 +29,7 @@ const getMongoDB = (callback: (db?: Db) => void) => {
 
         callback(db);
       
-        mongoClient.close().then(() => console.log('CLOSED')).catch((error) => console.log('ERROR Closing: ' + JSON.stringify(error)));
+        mongoClient.close().then().catch();
     });
 };
 
@@ -94,12 +94,7 @@ export const score = functions.https.onRequest((request, response) => {
     callAutoMLAPI(request.body.image).then((results: any) => {
         const submissionScore = processResults(results);
 
-        getMongoDB((db?: Db) => {
-            if (!db) {
-                response.status(500).send('Could not connect to MongoDB.');
-                return;
-            }
-    
+        getMongoDB((db: Db) => {
             const collection = db.collection(COLLECTION_NAME);
 
             collection.findOne({ address: request.body.address }).then((existing) => {
@@ -111,6 +106,7 @@ export const score = functions.https.onRequest((request, response) => {
                             evaluations: {
                                 timestamp: Date.now(),
                                 score: submissionScore,
+                                result: results,
                             },
                         },
                     }).then(() => {
@@ -123,6 +119,7 @@ export const score = functions.https.onRequest((request, response) => {
                             {
                                 timestamp: Date.now(),
                                 score: submissionScore,
+                                result: results,
                             },
                         ],
                     }).then(() => {
@@ -130,7 +127,7 @@ export const score = functions.https.onRequest((request, response) => {
                     }).catch((err) => response.status(500).send({ error: err }));
                 }
             }).catch((err) => response.status(500).send({ error: err }));
-        });
+        }, (err: string) => response.status(500).send({ error: err }));
     }).catch((err) => response.status(500).send({ error: err }));
 });
 
@@ -143,5 +140,34 @@ export const addresses = functions.https.onRequest((request, response) => {
     const skip = request.query.skip || 0;
     const limit = request.query.limit || 10;
 
-    
+    getMongoDB((db: Db) => {
+        const collection = db.collection(COLLECTION_NAME);
+
+        collection.aggregate([
+            {
+                '$limit': Number(limit)
+            },
+            {
+                '$skip': Number(skip)
+            },
+            {
+                '$project': {
+                    'address': '$address', 
+                    'totalScore': {
+                        '$sum': '$evaluations.score'
+                    }, 
+                    'count': {
+                        '$size': '$evaluations'
+                    }
+                }
+            }
+        ]).toArray((err: any, result: any) => {
+            if (err) {
+                response.status(500).send({ error: err })
+                return;
+            }
+
+            response.status(200).send(result);
+        });
+    }, (err: string) => response.status(500).send({ error: err }));
 });

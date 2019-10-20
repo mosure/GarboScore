@@ -10,6 +10,7 @@ import {
     Grid,
     Snackbar,
     IconButton,
+    SnackbarContent,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { ImagePicker } from 'react-file-picker';
@@ -29,6 +30,7 @@ const useStyles = makeStyles(
             color: theme.palette.secondary.main,
             marginBottom: 20,
             marginTop: '5%',
+            userSelect: 'none',
         },
         description: {
             maxWidth: 450,
@@ -42,9 +44,11 @@ const useStyles = makeStyles(
         },
         close: {
             padding: theme.spacing(0.5),
+            color: 'white',
         },
         error: {
             backgroundColor: theme.palette.error.dark,
+            color: 'white',
         },
     }),
 );
@@ -74,12 +78,17 @@ export const Demo: React.FC = () => {
                     return;
                 }
 
+                if (!result.result || result.result.length === 0) {
+                    snackbarError('Error Processing Image.');
+                    return;
+                }
+
                 // Set state to the correct response with image
                 const evaluation: Evaluation = {
                     imgAlt: '',
                     imgSrc: base64,
                     isLoaded: false,
-                    payload: result.result,
+                    payload: result.result[0],
                 };
 
                 setState({
@@ -158,30 +167,29 @@ export const Demo: React.FC = () => {
                 </Container>
             </Box>
             <Snackbar
-                className={classes.error}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
                 open={state.snackBarOpen}
                 autoHideDuration={6000}
-                ContentProps={{
-                    'aria-describedby': 'message-id',
-                }}
-                action={[
-                    <IconButton
-                        key='close'
-                        aria-label='close'
-                        color='inherit'
-                        className={classes.close}
-                        onClick={snackBarClose}
-                    >
-                        <Close/>
-                    </IconButton>,
-                ]}
                 onClose={snackBarClose}
-                message={<span id='message-id'>{state.snackBarMessage}</span>}
-            />
+            >
+                <SnackbarContent
+                    className={classes.error}
+                    action={[
+                        <IconButton
+                            key='close'
+                            aria-label='close'
+                            className={classes.close}
+                            onClick={snackBarClose}
+                        >
+                            <Close/>
+                        </IconButton>,
+                    ]}
+                    message={<span>{state.snackBarMessage}</span>}
+                />
+            </Snackbar>
         </>
     );
 };
