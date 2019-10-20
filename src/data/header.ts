@@ -8,6 +8,7 @@ interface Header {
 interface Icon {
     imgSrc: string;
     imgAlt: string;
+    link: string;
 }
 
 interface Button {
@@ -23,5 +24,6 @@ export const headerData: Header = {
     icon: {
         imgSrc: logo.default,
         imgAlt: 'Logo',
+        link: '/',
     },
 };
