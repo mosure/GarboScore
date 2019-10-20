@@ -1,1 +1,3 @@
-export { default as Demo } from './demo';
+export * from './demo';
+export * from './evaluation';
+export * from './presets';
