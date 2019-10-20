@@ -61,8 +61,8 @@ export const score = functions.https.onRequest((request, response) => {
         return;
     }
 
-    if (!request.body || !request.body.address || !request.body.image) {
-        response.status(400).send(request.body);
+    if (!request.body || request.body.address === undefined || request.body.image === undefined) {
+        response.status(400).send('Format: { address: string, image: string }');
         return;
     }
 
