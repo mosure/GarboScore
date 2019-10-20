@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Switch,
     Redirect,
@@ -9,25 +9,35 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 
 import { Header, Footer } from './shared';
-import { Home } from './home';
+import { Home, DisplayNone } from './home';
 import { Demo } from './demo';
 import { theme } from './theme';
 
 const App: React.FC = () => {
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoaded(true);
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
             <BrowserRouter>
-                <Header/>
+                <DisplayNone pose={loaded ? 'load' : 'init'}>
+                    <Header/>
 
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route exact path='/demo' component={Demo}/>
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route exact path='/demo' component={Demo}/>
 
-                    <Redirect to='/'/>
-                </Switch>
+                        <Redirect to='/'/>
+                    </Switch>
 
-                <Footer/>
+                    <Footer/>
+                </DisplayNone>
             </BrowserRouter>
         </ThemeProvider>
     );

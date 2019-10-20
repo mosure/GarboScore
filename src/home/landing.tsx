@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { landingData } from '../data';
+import { DropFade } from './';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -50,39 +51,45 @@ export const Landing: React.FC = () => {
             wrap='nowrap'
         >
             <Grid item>
-                <Typography
-                    variant='h1'
-                    align='center'
-                    className={classes.title}
-                >
-                    {landingData.title}
-                </Typography>
-                <Typography
-                    variant='h3'
-                    align='center'
-                    className={classes.subtitle}
-                >
-                    {landingData.subtitle}
-                </Typography>
-                <Typography
-                    variant='body1'
-                    align='center'
-                    className={classes.description}
-                >
-                    According to
-                    {' '}
-                    <Link
-                        onClick={logDescriptionLink}
-                        color='secondary'
-                        target='_blank'
-                        href='https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/'
+                <DropFade>
+                    <Typography
+                        variant='h1'
+                        align='center'
+                        className={classes.title}
                     >
-                        National Geographic,
-                    </Link>
-                    {' '}
-                    91% of plastics are not recycled.
-                    Through household incentivization, GarboScore provides a solution.
-                </Typography>
+                        {landingData.title}
+                    </Typography>
+                </DropFade>
+                <DropFade>
+                    <Typography
+                        variant='h3'
+                        align='center'
+                        className={classes.subtitle}
+                    >
+                        {landingData.subtitle}
+                    </Typography>
+                </DropFade>
+                <DropFade>
+                    <Typography
+                        variant='body1'
+                        align='center'
+                        className={classes.description}
+                    >
+                        According to
+                        {' '}
+                        <Link
+                            onClick={logDescriptionLink}
+                            color='secondary'
+                            target='_blank'
+                            href='https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/'
+                        >
+                            National Geographic,
+                        </Link>
+                        {' '}
+                        91% of plastics are not recycled.
+                        Through household incentivization, GarboScore provides a solution.
+                    </Typography>
+                </DropFade>
             </Grid>
         </Grid>
     );

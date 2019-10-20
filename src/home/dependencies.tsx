@@ -11,6 +11,7 @@ import {
 import posed from 'react-pose';
 
 import { dependencyData } from '../data';
+import { DropFade } from './';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -52,13 +53,15 @@ export const Dependencies: React.FC = () => {
             pt={4}
             pb={4}
         >
-            <Typography
-                variant='h4'
-                align='center'
-                className={classes.header}
-            >
-                {dependencyData.header}
-            </Typography>
+            <DropFade>
+                <Typography
+                    variant='h4'
+                    align='center'
+                    className={classes.header}
+                >
+                    {dependencyData.header}
+                </Typography>
+            </DropFade>
             <Grid
                 container
                 justify='center'
@@ -72,16 +75,18 @@ export const Dependencies: React.FC = () => {
                                 item
                                 key={index}
                             >
-                                <Link
-                                    href={dependency.link}
-                                    target='_blank'
-                                    onClick={logDependencyClick(dependency.imgAlt)}
-                                >
-                                    <PoseImg
-                                        src={dependency.imgSrc}
-                                        alt={dependency.imgAlt}
-                                    />
-                                </Link>
+                                <DropFade>
+                                    <Link
+                                        href={dependency.link}
+                                        target='_blank'
+                                        onClick={logDependencyClick(dependency.imgAlt)}
+                                    >
+                                        <PoseImg
+                                            src={dependency.imgSrc}
+                                            alt={dependency.imgAlt}
+                                        />
+                                    </Link>
+                                </DropFade>
                             </Grid>
                         );
                     })

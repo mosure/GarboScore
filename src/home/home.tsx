@@ -1,4 +1,5 @@
 import React from 'react';
+import posed from 'react-pose';
 import {
     Container,
     Toolbar,
@@ -22,8 +23,40 @@ const useStyles = makeStyles(
     }),
 );
 
+export const DropFade = posed.div({
+    load: {
+        y: '0px',
+        opacity: 1,
+        delay: (props: any) => props.delay || 0,
+        beforeChildren: (props: any) => props.beforeChildren || false,
+        staggerChildren: (props: any) => props.staggerChildren || 0,
+        transition: {
+            duration: 500,
+        },
+    },
+    init: {
+        y: '-100px',
+        opacity: 0,
+        transition: {
+            duration: 500,
+        },
+    },
+});
+
+export const DisplayNone = posed.div({
+    load: {
+        applyAtStart: { display: 'block' },
+        beforeChildren: true,
+        staggerChildren: 150,
+    },
+    init: {
+        applyAtEnd: { display: 'none' },
+    },
+});
+
 export const Home: React.FC = () => {
     const classes = useStyles();
+
     return (
         <>
             <Box minHeight='100vh'>
