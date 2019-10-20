@@ -28,7 +28,7 @@ export const timelineData: Timeline = {
     header: 'How It Works',
     snapshots: [
         {
-            header: 'Take out the trash',
+            header: 'Take out the Trash',
             description: `
                 Our process starts when you, the homeowner, takes your trash to the curb.
                 Does your trash can only contain landfill suitable items? GarboScore analyzes
@@ -44,7 +44,7 @@ export const timelineData: Timeline = {
         {
             header: 'Garbage Trucks and Baggage',
             description: `
-                Our process depends on a method of analysis to pick out recyclable items
+                Our process depends on X-ray image analysis to pick out recyclable items
                 from normal trash. We detail a multi-axis X-ray scanner inside of the
                 pre-compressed holding area of garbage trucks. This system could be retrofit or
                 built on new models. The X-rays would be safe, contained, and would provide outlines
@@ -62,8 +62,7 @@ export const timelineData: Timeline = {
             header: 'Machine Learning Analysis',
             description: `
                 Our machine learning pipeline utilizes Google Cloud Platform's AutoML Vision Object Detection
-                to locate and classify recyclable items in images. The core system would be identical to the production
-                implementation apart from the training set. Our current system details a proof of concept to show
+                to locate and classify recyclable items in images. Our current system details a proof of concept to show
                 that shape detection of recyclable items is possible. A more advanced system would take into consideration
                 multi-spectrum images from different axes.
             `,
@@ -75,8 +74,8 @@ export const timelineData: Timeline = {
         {
             header: 'Scoring Your Garbage',
             description: `
-                After processing the contents of garbage containers, our system tracks the household
-                the garbage came from along with an immediate score for that container. The score is
+                After processing the contents of a garbage container, our system documents the location of the household,
+                along with an immediate score for that container. The score is
                 determined by the number of items that should have been recycled. Communities can
                 customize the types of items accepted by the system to accomodate for different types
                 of recycling facilites.
@@ -89,9 +88,9 @@ export const timelineData: Timeline = {
         {
             header: 'Reporting',
             description: `
-                Our platform allows for external querying, via web API, of households and performs aggregations of scores
-                to provide accurate scores over time. These reports can be used by communities to further policy and
-                show recycling progress. The scores can also be accessed via our mobile app where you can view your
+                Our platform allows for external querying of households, via web API. These queries perform aggregations
+                of scores to provide accurate scores over time. These reports can be used by communities to further policies
+                and show recycling progress. The scores will also be available via our mobile app, where you can view your
                 garbage report in realtime.
             `,
             image: {
