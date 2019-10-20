@@ -1,6 +1,6 @@
-import firebase from '../assets/landing/firebase.svg';
-import googlecloud from '../assets/landing/googlecloud.svg';
-import mongodb from '../assets/landing/mongodb.svg';
+import firebase from '../../assets/landing/firebase.svg';
+import googlecloud from '../../assets/landing/googlecloud.svg';
+import mongodb from '../../assets/landing/mongodb.svg';
 
 interface Dependencies {
     header: string;

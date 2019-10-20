@@ -134,19 +134,12 @@ export const Timeline: React.FC = () => {
                                             className={classes.paper}
                                             elevation={8}
                                         >
-                                            {
-                                                (snapshot.element) && snapshot.element()
-                                            }
-                                            {
-                                                (snapshot.description) && (
-                                                    <Typography
-                                                        variant='body1'
-                                                        align='left'
-                                                    >
-                                                        {snapshot.description}
-                                                    </Typography>
-                                                )
-                                            }
+                                            <Typography
+                                                variant='body1'
+                                                align='left'
+                                            >
+                                                {snapshot.description}
+                                            </Typography>
                                         </Paper>
                                     </Grid>
                                     <Grid
