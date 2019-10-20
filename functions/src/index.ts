@@ -145,10 +145,10 @@ export const addresses = functions.https.onRequest((request, response) => {
 
         collection.aggregate([
             {
-                '$limit': limit
+                '$limit': Number(limit)
             },
             {
-                '$skip': skip
+                '$skip': Number(skip)
             },
             {
                 '$project': {
