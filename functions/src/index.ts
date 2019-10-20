@@ -57,19 +57,23 @@ const callAutoMLAPI = (b64img: string) => {
 };
 
 const processResults = (results: any): number => {
-    let result = 0;
+    let count = 0;
 
-    if (results.payload) {
-        for (const item of results.payload) {
-            if (recyclables.indexOf(item.displayName) !== -1) {
-                if (item.imageObjectDetection.score > threshold) {
-                    result++;
+    if (results) {
+        for (const result of results) {
+            if (result) {
+                for (const item of result.payload) {
+                    if (recyclables.indexOf(item.displayName) !== -1) {
+                        if (item.imageObjectDetection.score > threshold) {
+                            count++;
+                        }
+                    }
                 }
             }
-        }
+        } 
     }
 
-    return result;
+    return count;
 };
 
 export const score = functions.https.onRequest((request, response) => {
