@@ -10,6 +10,7 @@ import {
 import {
     Landing,
     Dependencies,
+    Timeline,
 } from './';
 
 const useStyles = makeStyles(
@@ -24,15 +25,20 @@ const useStyles = makeStyles(
 export const Home: React.FC = () => {
     const classes = useStyles();
     return (
-        <Box minHeight='100vh'>
-            <Toolbar/>
-            <Container
-                maxWidth='lg'
-                className={classes.landing}
-            >
-                <Landing/>
+        <>
+            <Box minHeight='100vh'>
+                <Toolbar/>
+                <Container
+                    maxWidth='lg'
+                    className={classes.landing}
+                >
+                    <Landing/>
+                </Container>
+                <Dependencies/>
+            </Box>
+            <Container maxWidth='lg'>
+                <Timeline/>
             </Container>
-            <Dependencies/>
-        </Box>
+        </>
     );
 };
