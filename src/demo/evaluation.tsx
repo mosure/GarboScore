@@ -12,8 +12,8 @@ const useStyles = makeStyles(
     (theme) => createStyles({
         container: {
             position: 'relative',
-            width: 200,
-            height: 400,
+            width: '100%',
+            height: '100%',
         },
         spinner: {
             position: 'absolute',
@@ -36,10 +36,30 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                 role='img'
                 viewBox='0 0 1 1'
             >
-                
+                <image height={1} width={1} href={props.imgSrc}/>
+                {
+                    props.payload.map((obj, index) => {
+                        const x = obj.imageObjectDetection[0].boundingBox.normalizedVertices[0].x;
+                        const y = obj.imageObjectDetection[0].boundingBox.normalizedVertices[0].y;
+                        const width = obj.imageObjectDetection[0].boundingBox.normalizedVertices[1].x;
+                        const height = obj.imageObjectDetection[0].boundingBox.normalizedVertices[1].y;
+                        return (
+                            <rect
+                                key={index}
+                                fill='none'
+                                stroke={obj.imageObjectDetection[0].color}
+                                strokeWidth={0.001}
+                                x={x}
+                                y={y}
+                                width={width - x}
+                                height={height - y}
+                            />
+                        );
+                    })
+                }
             </svg>
             {
-                props.isLoaded && (
+                !props.isLoaded && (
                     <LinearProgress
                         color='secondary'
                         className={classes.spinner}
