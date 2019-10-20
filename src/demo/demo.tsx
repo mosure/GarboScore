@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactGA from 'react-ga';
 import {
     Box,
     Toolbar,
@@ -21,6 +22,14 @@ import { Presets } from './';
 import { Evaluation } from '../data/demo/scores';
 import { Addresses } from './addresses';
 import { Evaluation as EvalComp } from './evaluation';
+
+const logUploadButton = () => {
+    ReactGA.event({
+        category: 'Button',
+        action: 'Upload Image',
+        label: 'Demo',
+    });
+};
 
 const useStyles = makeStyles(
     (theme) => createStyles({
