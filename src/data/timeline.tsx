@@ -45,7 +45,9 @@ export const timelineData: Timeline = {
         },
         {
             header: 'ML/object dection',
-            description: '',
+            description: `
+
+            `,
             image: {
                 imgSrc: processing,
                 imgAlt: 'Machine learning processes the data',
@@ -53,7 +55,13 @@ export const timelineData: Timeline = {
         },
         {
             header: 'Garbage scoring/location',
-            description: '',
+            description: `
+                After processing the contents of garbage containers, our system tracks the household
+                the garbage came from along with an immediate score for that container. The score is
+                determined by the number of items that should have been recycled. Communities can
+                customize the types of items accepted by the system to accomodate for different types
+                of recycling facilites.
+            `,
             image: {
                 imgSrc: location,
                 imgAlt: 'A score is assigned to every household',
@@ -61,7 +69,11 @@ export const timelineData: Timeline = {
         },
         {
             header: 'Reporting',
-            description: '',
+            description: `
+                Our platform allows for external querying, via web API, of households and performs aggregations of scores
+                to provide accurate scores over time. These reports can be used by communities to further policy and
+                show recycling progress.
+            `,
             image: {
                 imgSrc: report,
                 imgAlt: 'Reports are generated for each household',

@@ -75,7 +75,7 @@ const useStyles = makeStyles(
 export const Timeline: React.FC = () => {
     const classes = useStyles();
     return (
-        <Box>
+        <Box mb={8}>
             <Typography
                 variant='h3'
                 align='center'

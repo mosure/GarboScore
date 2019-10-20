@@ -59,7 +59,7 @@ export const Landing: React.FC = () => {
                     className={classes.description}
                 >
                     According to
-                    &nbsp;
+                    {' '}
                     <Link
                         color='secondary'
                         target='_blank'
@@ -67,7 +67,7 @@ export const Landing: React.FC = () => {
                     >
                         National Geographic,
                     </Link>
-                    &nbsp;
+                    {' '}
                     91% of plastics are not recycled.
                     Through household incentivization, GarboScore provides a solution.
                 </Typography>

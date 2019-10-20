@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, makeStyles, createStyles, Typography } from '@material-ui/core';
+import { Grid, makeStyles, createStyles, Typography, Link } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -43,7 +43,16 @@ const Footer: React.FC = () => {
         >
             <Grid item>
                 <Typography className={classes.consoleFont} variant='body2'>
-                    Built by Brady Lenz and Mitchell Mosure
+                    Built by {' '}
+                    <Link color='secondary' href='https://blenz.dev'>
+                        {'Brady Lenz'}
+                    </Link>
+                    {' '}
+                    and
+                    {' '}
+                    <Link color='secondary' href='https://mitchell.mosure.me'>
+                        {'Mitchell Mosure'}
+                    </Link>
                 </Typography>
             </Grid>
         </Grid>
