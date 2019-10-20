@@ -16,12 +16,12 @@ const predictionClient = new automl.PredictionServiceClient();
 const recyclables = ['glass', 'plastic', 'metal'];
 const threshold = 0.5;
 
-const getMongoDB = (callback: (db: Db) => void, error: (err?: string) => void) => {
+const getMongoDB = (callback: (db: Db) => void, error: (err: any) => void) => {
     const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
     mongoClient.connect((err) => {
         if (err) {
-            error(err.errmsg);
+            error(err);
             return;
         }
 
@@ -127,7 +127,7 @@ export const score = functions.https.onRequest((request, response) => {
                     }).catch((err) => response.status(500).send({ error: err }));
                 }
             }).catch((err) => response.status(500).send({ error: err }));
-        }, (err?: string) => response.status(500).send({ error: err }));
+        }, (err: any) => response.status(500).send({ error: err }));
     }).catch((err) => response.status(500).send({ error: err }));
 });
 
@@ -170,5 +170,5 @@ export const addresses = functions.https.onRequest((request, response) => {
 
             response.status(200).send(result);
         });
-    }, (err?: string) => response.status(500).send({ error: err }));
+    }, (err: any) => response.status(500).send({ error: err }));
 });
