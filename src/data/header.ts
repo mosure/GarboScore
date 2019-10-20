@@ -1,6 +1,13 @@
+import * as logo from '../assets/logo.png';
+
 interface Header {
-    icon: string;
     button: Button;
+    icon: Icon;
+}
+
+interface Icon {
+    imgSrc: string;
+    imgAlt: string;
 }
 
 interface Button {
@@ -8,10 +15,13 @@ interface Button {
     link: string;
 }
 
-export const headerData = {
-    icon: 'Icon',
+export const headerData: Header = {
     button: {
         text: 'Demo',
         link: 'demo',
-    }
+    },
+    icon: {
+        imgSrc: logo.default,
+        imgAlt: 'Logo',
+    },
 };
