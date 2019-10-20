@@ -56,6 +56,7 @@ const useStyles = makeStyles(
         },
         customViewer: {
             height: '400px',
+            marginBottom: 15,
         },
     }),
 );
@@ -186,6 +187,12 @@ export const Demo: React.FC = () => {
                         <Grid item className={classes.customViewer}>
                             <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
                                 <EvalComp {...state.evaluation}/>
+                                <Typography
+                                        variant='body1'
+                                        align='center'
+                                >
+                                    {`Score: ${state.evaluation.score}`}
+                                </Typography>
                             </Box>
                         </Grid>
                     </Grid>
