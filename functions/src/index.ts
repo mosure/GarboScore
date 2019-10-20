@@ -143,5 +143,39 @@ export const addresses = functions.https.onRequest((request, response) => {
     const skip = request.query.skip || 0;
     const limit = request.query.limit || 10;
 
-    
+    getMongoDB((db?: Db) => {
+        if (!db) {
+            response.status(500).send('Could not connect to MongoDB.');
+            return;
+        }
+
+        const collection = db.collection(COLLECTION_NAME);
+
+        collection.aggregate([
+            {
+                '$limit': limit
+            },
+            {
+                '$skip': skip
+            },
+            {
+                '$project': {
+                    'address': '$address', 
+                    'totalScore': {
+                        '$sum': '$evaluations.score'
+                    }, 
+                    'count': {
+                        '$size': '$evaluations'
+                    }
+                }
+            }
+        ]).toArray((err: any, result: any) => {
+            if (err) {
+                response.status(500).send({ error: err })
+                return;
+            }
+
+            response.status(200).send(result);
+        });
+    });
 });
