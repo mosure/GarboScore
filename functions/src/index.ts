@@ -104,7 +104,7 @@ export const score = functions.https.onRequest((request, response) => {
                 score: submissionScore,
                 result: results,
             }).then(() => {
-                response.status(201).send({ score: submissionScore, result: results, });
+                response.status(201).json({ score: submissionScore, result: results, });
             }).catch((err) => response.status(500).send({ error: err, location: 'insertOne' }));
         }, (err: any) => response.status(500).send({ error: err, location: 'getMongoDB' }));
     }).catch((err) => response.status(500).send({ error: err, location: 'callAutoML' }));
@@ -154,7 +154,7 @@ export const addresses = functions.https.onRequest((request, response) => {
                 return;
             }
 
-            response.status(200).send(result);
+            response.status(200).json(result);
         });
     }, (err: any) => response.status(500).send({ error: err }));
 });
