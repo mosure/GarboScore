@@ -20,6 +20,7 @@ import { computeScore } from '../shared/service';
 import { Presets } from './';
 import { Evaluation } from '../data/demo/scores';
 import { Addresses } from './addresses';
+import { Evaluation as EvalComp } from './evaluation';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -42,6 +43,7 @@ const useStyles = makeStyles(
         },
         container: {
             paddingTop: '32px',
+            paddingBottom: '32px',
         },
         close: {
             padding: theme.spacing(0.5),
@@ -50,6 +52,13 @@ const useStyles = makeStyles(
         error: {
             backgroundColor: theme.palette.error.dark,
             color: 'white',
+        },
+        customViewer: {
+            height: '400px',
+        },
+        viewerPlaceholder: {
+            height: '100%',
+            width: '400px',
         },
     }),
 );
@@ -161,6 +170,21 @@ export const Demo: React.FC = () => {
                                     Upload Image
                                 </Button>
                             </ImagePicker>
+                        </Grid>
+                        <Grid item className={classes.customViewer}>
+                            {
+                                state.evaluation.imgSrc &&
+                                <EvalComp {...state.evaluation}/>
+                            }
+                            {
+                                !state.evaluation.imgSrc &&
+                                <Box
+                                    className={classes.viewerPlaceholder}
+                                    border={1}
+                                    borderColor='secondary.main'
+                                    borderRadius={16}
+                                />
+                            }
                         </Grid>
                     </Grid>
                     <Addresses/>
