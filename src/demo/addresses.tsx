@@ -43,6 +43,8 @@ export const Addresses: React.FC = () => {
 
     useEffect(() => {
         getAddresses(page * rowsPerPage, rowsPerPage).then((result) => {
+            // tslint:disable-next-line:no-console
+            console.log({result});
             if (Array.isArray(result)) {
                 setRows({
                     value: result,
