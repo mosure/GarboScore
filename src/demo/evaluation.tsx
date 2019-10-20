@@ -41,7 +41,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
     return (
         <Box className={classes.container}>
             {
-                (props.payload && props.payload[0].imageObjectDetection) && (
+                (props.payload && props.payload.length > 0 && props.payload[0].imageObjectDetection) && (
                     <svg
                         height='100%'
                         width='100%'
