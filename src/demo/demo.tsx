@@ -105,11 +105,9 @@ export const Demo: React.FC = () => {
     };
 
     const fileConfirmed = (base64: string) => {
-        const address = 'TEST';
-
         // Set state to the correct response with image
         const evaluation: Evaluation = {
-            imgAlt: address,
+            imgAlt: addressObj.address,
             imgSrc: base64,
             isLoaded: false,
             payload: [],
@@ -121,7 +119,7 @@ export const Demo: React.FC = () => {
         });
 
         computeScore({
-            address,
+            address: addressObj.address,
             image: base64.split(',')[1], // Strip out the type
         }).then((result) => {
             evaluation.payload = result.result[0].payload;
