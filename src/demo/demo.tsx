@@ -187,11 +187,12 @@ export const Demo: React.FC = () => {
                         <Grid item>
                             <TextField
                                 id='standard-name'
-                                label='Name'
+                                label='Address'
                                 className={classes.textField}
                                 value={addressObj.address}
                                 onChange={handleAddressChange}
                                 margin='normal'
+                                color='secondary'
                             />
                         </Grid>
                         <Grid item>
