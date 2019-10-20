@@ -1,1 +1,3 @@
-export { default as Home } from './home';
+export * from './home';
+export * from './landing';
+export * from './dependencies';
