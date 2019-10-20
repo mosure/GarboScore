@@ -62,7 +62,7 @@ export const score = functions.https.onRequest((request, response) => {
     }
 
     if (!request.body['address'] || !request.body['image']) {
-        response.status(400).send('Body must be of type: { address: string, image: string }');
+        response.status(400).send(request.body);
         return;
     }
 
