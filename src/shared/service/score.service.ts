@@ -20,5 +20,8 @@ export const computeScore = (submission: ScoreBody) => {
     xhr.open('POST', window.location.protocol + '//' + window.location.host + '/api/score');
 
     // send the request
-    xhr.send(JSON.stringify(submission));
+    xhr.send(JSON.stringify({
+        address: submission.address,
+        image: submission.image,
+    }));
 };

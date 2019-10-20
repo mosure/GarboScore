@@ -61,7 +61,11 @@ export const score = functions.https.onRequest((request, response) => {
         return;
     }
 
-    if (!request.body || request.body.address === undefined || request.body.image === undefined) {
+    if (request.body === undefined) {
+        response.status(400).send('Body is undefined');
+    }
+
+    if (request.body.address === undefined || request.body.image === undefined) {
         response.status(400).send('Format: { address: string, image: string }');
         return;
     }
