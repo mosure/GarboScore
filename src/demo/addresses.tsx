@@ -71,7 +71,7 @@ export const Addresses: React.FC = () => {
 
     useEffect(() => {
         refreshTableData();
-    }, []);
+    }, [refreshTableData]);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
