@@ -4,6 +4,7 @@ import {
     Typography,
     createStyles,
     makeStyles,
+    Link,
 } from '@material-ui/core';
 
 import { landingData } from '../data';
@@ -57,7 +58,17 @@ export const Landing: React.FC = () => {
                     align='center'
                     className={classes.description}
                 >
-                    {landingData.description}
+                    According to
+                    &nbsp;
+                    <Link
+                        color='secondary'
+                        href='https://www.nationalgeographic.com/news/2017/07/plastic-produced-recycling-waste-ocean-trash-debris-environment/'
+                    >
+                        National Geographic
+                    </Link>
+                    &nbsp;
+                    91% of plastics are not recycled.
+                    Through household incentivization, GarboScore provides a solution.
                 </Typography>
             </Grid>
         </Grid>

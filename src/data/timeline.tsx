@@ -68,9 +68,14 @@ export const timelineData: Timeline = {
             },
         },
         {
-            header: 'Incentives',
+            header: 'What are the incentives?',
             description: `
-
+                If a community decides to implement GarboScore, providing some form of incentivization
+                would encourage the positive change of proper recycling. This incentivization could be either
+                positive or negative, for example, tax breaks could be given to households with better scores
+                or fines could be given out to households with bad scores. GarboScore recommends the positive
+                incentive, as communities would be more receptive to the idea and errors do not result in
+                unsolicited fines.
             `,
             image: {
                 imgSrc: incentive,
