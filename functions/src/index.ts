@@ -13,12 +13,12 @@ const AUTO_ML_MODEL = process.env.AUTO_ML_MODEL || '';
 
 const predictionClient = new automl.PredictionServiceClient();
 
-const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-
 const recyclables = ['glass', 'plastic', 'metal'];
 const threshold = 0.5;
 
 const getMongoDB = (callback: (db?: Db) => void) => {
+    const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+
     mongoClient.connect((err) => {
         if (err) {
             callback();
