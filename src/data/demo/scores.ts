@@ -1,3 +1,5 @@
+import * as example1 from '../../assets/demo/example1.jpg';
+
 export interface Evaluation {
     imgSrc: string;
     imgAlt: string;
@@ -27,8 +29,8 @@ interface NormalizedVertices {
 
 export const evaluationData: Evaluation[] = [
     {
-        imgSrc: '',
-        imgAlt: '',
+        imgSrc: example1.default,
+        imgAlt: 'Example 1',
         isLoaded: true,
         payload: [
             {
