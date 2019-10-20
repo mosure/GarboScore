@@ -17,7 +17,7 @@ const useStyles = makeStyles(
         title: {
             color: theme.palette.secondary.main,
             marginBottom: 20,
-            marginTop: '15%',
+            marginTop: '10%',
             userSelect: 'none',
         },
         subtitle: {
