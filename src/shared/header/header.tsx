@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { headerData } from '../../data';
+import { DropFade } from '../../home';
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -79,28 +80,32 @@ export const Header: React.FC = () => {
                         className={classes.grid}
                     >
                         <Grid item>
-                            <Link
-                                to={headerData.icon.link}
-                                onClick={logImageClick}
-                            >
-                                <img
-                                    src={headerData.icon.imgSrc}
-                                    alt={headerData.icon.imgAlt}
-                                    className={classes.pointer}
-                                />
-                            </Link>
+                            <DropFade>
+                                <Link
+                                    to={headerData.icon.link}
+                                    onClick={logImageClick}
+                                >
+                                    <img
+                                        src={headerData.icon.imgSrc}
+                                        alt={headerData.icon.imgAlt}
+                                        className={classes.pointer}
+                                    />
+                                </Link>
+                            </DropFade>
                         </Grid>
                         <Grid item>
-                            <Button
-                                component={Link}
-                                to={headerData.button.link}
-                                variant='outlined'
-                                color='secondary'
-                                size='large'
-                                onClick={logButtonClick}
-                            >
-                                {headerData.button.text}
-                            </Button>
+                            <DropFade>
+                                <Button
+                                    component={Link}
+                                    to={headerData.button.link}
+                                    variant='outlined'
+                                    color='secondary'
+                                    size='large'
+                                    onClick={logButtonClick}
+                                >
+                                    {headerData.button.text}
+                                </Button>
+                            </DropFade>
                         </Grid>
                     </Grid>
                 </Toolbar>

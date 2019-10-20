@@ -8,8 +8,10 @@ import {
     createStyles,
     Link,
 } from '@material-ui/core';
+import posed from 'react-pose';
 
 import { dependencyData } from '../data';
+import { DropFade } from './';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -32,6 +34,16 @@ const logDependencyClick = (name: string) => {
     };
 };
 
+const PoseImg = posed.img({
+    hoverable: true,
+    init: {
+      scale: 1,
+    },
+    hover: {
+      scale: 1.2,
+    },
+});
+
 export const Dependencies: React.FC = () => {
     const classes = useStyles();
     return (
@@ -41,13 +53,15 @@ export const Dependencies: React.FC = () => {
             pt={4}
             pb={4}
         >
-            <Typography
-                variant='h4'
-                align='center'
-                className={classes.header}
-            >
-                {dependencyData.header}
-            </Typography>
+            <DropFade>
+                <Typography
+                    variant='h4'
+                    align='center'
+                    className={classes.header}
+                >
+                    {dependencyData.header}
+                </Typography>
+            </DropFade>
             <Grid
                 container
                 justify='center'
@@ -61,16 +75,18 @@ export const Dependencies: React.FC = () => {
                                 item
                                 key={index}
                             >
-                                <Link
-                                    href={dependency.link}
-                                    target='_blank'
-                                    onClick={logDependencyClick(dependency.imgAlt)}
-                                >
-                                    <img
-                                        src={dependency.imgSrc}
-                                        alt={dependency.imgAlt}
-                                    />
-                                </Link>
+                                <DropFade>
+                                    <Link
+                                        href={dependency.link}
+                                        target='_blank'
+                                        onClick={logDependencyClick(dependency.imgAlt)}
+                                    >
+                                        <PoseImg
+                                            src={dependency.imgSrc}
+                                            alt={dependency.imgAlt}
+                                        />
+                                    </Link>
+                                </DropFade>
                             </Grid>
                         );
                     })
