@@ -41,16 +41,16 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
     return (
         <Box className={classes.container}>
             {
-                (props.payload && props.payload.length > 0 && props.payload[0].imageObjectDetection) && (
-                    <svg
-                        height='100%'
-                        width='100%'
-                        xmlns='http://www.w3.org/2000/svg'
-                        role='img'
-                        viewBox='0 0 1 1'
-                    >
-                        <image height={1} width={1} href={props.imgSrc}/>
-                        {
+                <svg
+                    height='100%'
+                    width='100%'
+                    xmlns='http://www.w3.org/2000/svg'
+                    role='img'
+                    viewBox='0 0 1 1'
+                >
+                    <image height={1} width={1} href={props.imgSrc}/>
+                    {
+                        (props.payload && props.payload.length > 0 && props.payload[0].imageObjectDetection) && (
                             props.payload.map((obj, index) => {
                                 const x = obj.imageObjectDetection.boundingBox.normalizedVertices[0].x;
                                 const y = obj.imageObjectDetection.boundingBox.normalizedVertices[0].y;
@@ -72,9 +72,9 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                                     </rect>
                                 );
                             })
-                        }
-                    </svg>
-                )
+                        )
+                    }
+                </svg>
             }
             {
                 !props.isLoaded && props.imgSrc && (
