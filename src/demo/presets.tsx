@@ -6,9 +6,6 @@ import {
     Grid,
     Paper,
     Box,
-    Hidden,
-    GridList,
-    GridListTile,
 } from '@material-ui/core';
 
 import { Evaluation } from './';
@@ -22,17 +19,14 @@ const useStyles = makeStyles(
         scrollableGrid: {
             overflowX: 'auto',
         },
-        gridList: {
-            flexWrap: 'nowrap',
-            transform: 'translateZ(0)',
-        },
         header: {
             color: theme.palette.text.hint,
         },
         paper: {
             padding: 16,
             borderRadius: 12,
-            height: '100%',
+            minWidth: 332,
+            minHeight: 332,
         },
         imageContainer: {
         },
@@ -92,7 +86,7 @@ export const Presets = () => {
             </Box>
             <Grid
                 container
-                justify='center'
+                justify='flex-start'
                 spacing={4}
                 wrap='nowrap'
                 className={classes.scrollableGrid}
@@ -103,13 +97,22 @@ export const Presets = () => {
                             <Grid
                                 item
                                 key={index}
-                                xs={4}
+                                xs={12}
+                                sm={8}
                             >
                                 <Paper
                                     elevation={8}
                                     className={classes.paper}
                                 >
-                                    <Evaluation {...evalutation}/>
+                                    <Box minHeight={300} minWidth={300}>
+                                        <Evaluation {...evalutation}/>
+                                    </Box>
+                                    <Typography
+                                        variant='body1'
+                                        align='center'
+                                    >
+                                        {`Score: ${evalutation.score}`}
+                                    </Typography>
                                 </Paper>
                             </Grid>
                         );
