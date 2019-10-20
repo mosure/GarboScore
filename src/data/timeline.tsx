@@ -1,3 +1,5 @@
+import React from 'react';
+
 import garbagetruck from '../assets/timeline/garbage-truck.svg';
 import incentive from '../assets/timeline/incentive.svg';
 import location from '../assets/timeline/location.svg';
@@ -12,7 +14,8 @@ interface Timeline {
 
 interface Snapshot {
     header: string;
-    description: string;
+    description?: string;
+    element?: () => React.ReactElement;
     image: Image;
 }
 
@@ -29,7 +32,7 @@ export const timelineData: Timeline = {
             description: '',
             image: {
                 imgSrc: trash,
-                imgAlt: '',
+                imgAlt: 'Taking out the trash',
             },
         },
         {
@@ -37,7 +40,7 @@ export const timelineData: Timeline = {
             description: '',
             image: {
                 imgSrc: garbagetruck,
-                imgAlt: '',
+                imgAlt: 'Garbage truck collects the garbage',
             },
         },
         {
@@ -45,7 +48,7 @@ export const timelineData: Timeline = {
             description: '',
             image: {
                 imgSrc: processing,
-                imgAlt: '',
+                imgAlt: 'Machine learning processes the data',
             },
         },
         {
@@ -53,7 +56,7 @@ export const timelineData: Timeline = {
             description: '',
             image: {
                 imgSrc: location,
-                imgAlt: '',
+                imgAlt: 'A score is assigned to every household',
             },
         },
         {
@@ -61,15 +64,17 @@ export const timelineData: Timeline = {
             description: '',
             image: {
                 imgSrc: report,
-                imgAlt: '',
+                imgAlt: 'Reports are generated for each household',
             },
         },
         {
             header: 'Incentives',
-            description: '',
+            description: `
+
+            `,
             image: {
                 imgSrc: incentive,
-                imgAlt: '',
+                imgAlt: 'Households save money via proper recycling',
             },
         },
     ],
