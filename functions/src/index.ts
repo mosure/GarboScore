@@ -105,7 +105,7 @@ export const score = functions.https.onRequest((request, response) => {
                             evaluations: {
                                 timestamp: Date.now(),
                                 score: submissionScore,
-                                result: results,
+                                //result: results,
                             },
                         },
                     }).then(() => {
@@ -118,7 +118,7 @@ export const score = functions.https.onRequest((request, response) => {
                             {
                                 timestamp: Date.now(),
                                 score: submissionScore,
-                                result: results,
+                                //result: results,
                             },
                         ],
                     }).then(() => {
