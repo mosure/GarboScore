@@ -1,11 +1,9 @@
-import React from 'react';
-
-import garbagetruck from '../assets/timeline/garbage-truck.svg';
-import incentive from '../assets/timeline/incentive.svg';
-import location from '../assets/timeline/location.svg';
-import processing from '../assets/timeline/processing.svg';
-import report from '../assets/timeline/report.svg';
-import trash from '../assets/timeline/trash.svg';
+import garbagetruck from '../../assets/timeline/garbage-truck.svg';
+import incentive from '../../assets/timeline/incentive.svg';
+import location from '../../assets/timeline/location.svg';
+import processing from '../../assets/timeline/processing.svg';
+import report from '../../assets/timeline/report.svg';
+import trash from '../../assets/timeline/trash.svg';
 
 interface Timeline {
     header: string;
@@ -14,8 +12,7 @@ interface Timeline {
 
 interface Snapshot {
     header: string;
-    description?: string;
-    element?: () => React.ReactElement;
+    description: string;
     image: Image;
 }
 
