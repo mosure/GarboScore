@@ -1,6 +1,6 @@
 import * as example1 from '../../assets/demo/example1.jpg';
 
-interface Evaluation {
+export interface Evaluation {
     imgSrc: string;
     imgAlt: string;
     payload: ClassificationObject[];

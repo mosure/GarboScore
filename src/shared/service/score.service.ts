@@ -5,7 +5,7 @@ export interface ScoreResult {
 export interface ScoreBody {
     address: string;
     image: string;
-    callback: (result: ScoreResult) => void;
+    callback: (result?: ScoreResult) => void;
 }
 
 export const computeScore = (submission: ScoreBody) => {
@@ -14,6 +14,10 @@ export const computeScore = (submission: ScoreBody) => {
     // get a callback when the server responds
     xhr.addEventListener('load', () => {
         submission.callback(xhr.response);
+    });
+
+    xhr.addEventListener('error', () => {
+        submission.callback(undefined);
     });
 
     // open the request with the verb and the url

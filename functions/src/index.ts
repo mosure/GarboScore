@@ -78,7 +78,7 @@ const processResults = (results: any): number => {
 
 export const score = functions.https.onRequest((request, response) => {
     if (request.method !== 'POST') {
-        response.status(200).send('Use a POST instead!');
+        response.status(404).send('Use a POST instead!');
         return;
     }
 
@@ -132,4 +132,16 @@ export const score = functions.https.onRequest((request, response) => {
             }).catch((err) => response.status(500).send({ error: err }));
         });
     }).catch((err) => response.status(500).send({ error: err }));
+});
+
+export const addresses = functions.https.onRequest((request, response) => {
+    if (request.method !== 'GET') {
+        response.status(404).send('Use a GET instead!');
+        return;
+    }
+
+    const skip = request.query.skip || 0;
+    const limit = request.query.limit || 10;
+
+    
 });

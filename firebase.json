@@ -12,6 +12,10 @@
         "function": "score"
       },
       {
+        "source": "/api/addresses",
+        "function": "addresses"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

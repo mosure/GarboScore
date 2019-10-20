@@ -9,11 +9,14 @@ import {
     Button,
     Grid,
     Snackbar,
+    IconButton,
 } from '@material-ui/core';
+import { Close } from '@material-ui/icons';
 import { ImagePicker } from 'react-file-picker';
 
 import { demoData } from '../data';
 import { computeScore, ScoreResult } from '../shared/service';
+import { Evaluation } from '../data/demo/scores';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -36,33 +39,63 @@ const useStyles = makeStyles(
         container: {
             paddingTop: '32px',
         },
+        close: {
+            padding: theme.spacing(0.5),
+        },
+        error: {
+            backgroundColor: theme.palette.error.dark,
+        },
     }),
 );
 
 const Demo: React.FC = () => {
     const classes = useStyles();
+
+    const initializer: Evaluation = {
+        imgAlt: '',
+        imgSrc: '',
+        isLoaded: false,
+        payload: [],
+    };
+
     const [state, setState] = useState({
         snackBarOpen: false,
         snackBarMessage: '',
-        base64Image: '',
+        evaluation: initializer,
     });
 
     const fileConfirmed = (base64: string) => {
         computeScore({
             address: 'TEST',
-            callback: (result: ScoreResult) => {
-                // tslint:disable-next-line:no-console
-                console.log(result);
+            callback: (result?: ScoreResult) => {
+                if (!result) {
+                    snackbarError('Error Processing Image.');
+                    return;
+                }
+
+                // Set state to the correct response with image
+                const evaluation: Evaluation = {
+                    imgAlt: '',
+                    imgSrc: base64,
+                    isLoaded: false,
+                    payload: result.result,
+                };
+
+                setState({
+                    snackBarOpen: false,
+                    snackBarMessage: '',
+                    evaluation,
+                });
             },
             image: base64.split(',')[1], // Strip out the type
         });
     };
 
-    const fileError = (error: string) => {
+    const snackbarError = (error: string) => {
         setState({
             snackBarOpen: true,
             snackBarMessage: error,
-            base64Image: '',
+            evaluation: initializer,
         });
     };
 
@@ -70,7 +103,7 @@ const Demo: React.FC = () => {
         setState({
             snackBarOpen: false,
             snackBarMessage: '',
-            base64Image: '',
+            evaluation: initializer,
         });
     };
 
@@ -108,7 +141,7 @@ const Demo: React.FC = () => {
                                 extensions={['jpg', 'jpeg', 'png']}
                                 dims={{minWidth: 100, maxWidth: 1000, minHeight: 100, maxHeight: 1000}}
                                 onChange={fileConfirmed}
-                                onError={fileError}
+                                onError={snackbarError}
                             >
                                 <Button
                                     variant='outlined'
@@ -123,6 +156,7 @@ const Demo: React.FC = () => {
                 </Container>
             </Box>
             <Snackbar
+                className={classes.error}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
@@ -132,6 +166,17 @@ const Demo: React.FC = () => {
                 ContentProps={{
                     'aria-describedby': 'message-id',
                 }}
+                action={[
+                    <IconButton
+                        key='close'
+                        aria-label='close'
+                        color='inherit'
+                        className={classes.close}
+                        onClick={snackBarClose}
+                    >
+                        <Close/>
+                    </IconButton>,
+                ]}
                 onClose={snackBarClose}
                 message={<span id='message-id'>{state.snackBarMessage}</span>}
             />
