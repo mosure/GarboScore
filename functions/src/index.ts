@@ -21,7 +21,7 @@ const getMongoDB = (callback: (db: Db) => void, error: (err: any) => void) => {
 
     mongoClient.connect((err) => {
         if (err) {
-            return;
+            // This always evaluates
         }
 
         const db = mongoClient.db(MONGODB_NAME);
