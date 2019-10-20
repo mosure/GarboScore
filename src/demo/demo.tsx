@@ -35,6 +35,7 @@ const useStyles = makeStyles(
         description: {
             maxWidth: 450,
             margin: 'auto',
+            marginBottom: 40,
         },
         center: {
             margin: 'auto',
