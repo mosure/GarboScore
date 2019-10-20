@@ -25,7 +25,7 @@ interface NormalizedVertices {
     y: number;
 }
 
-export const evalutionData: Evaluation[] = [
+export const evaluationData: Evaluation[] = [
     {
         imgSrc: '',
         imgAlt: '',
