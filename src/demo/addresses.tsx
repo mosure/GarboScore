@@ -138,7 +138,7 @@ export const Addresses: React.FC = () => {
                                                 {row.totalScore}
                                             </TableCell>
                                             <TableCell align='right'>
-                                                {row.count > 0 ? row.totalScore / row.count : 0}
+                                                {row.count > 0 ? Math.round(row.totalScore / row.count * 100) / 100 : 0}
                                             </TableCell>
                                         </TableRow>
                                     );
