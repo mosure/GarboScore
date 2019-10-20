@@ -41,7 +41,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
     return (
         <Box className={classes.container}>
             {
-                (props.payload) && (
+                (props.payload && props.payload[0].imageObjectDetection) && (
                     <svg
                         height='100%'
                         width='100%'
@@ -52,10 +52,10 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                         <image height={1} width={1} href={props.imgSrc}/>
                         {
                             props.payload.map((obj, index) => {
-                                const x = obj.imageObjectDetection[0].boundingBox.normalizedVertices[0].x;
-                                const y = obj.imageObjectDetection[0].boundingBox.normalizedVertices[0].y;
-                                const width = obj.imageObjectDetection[0].boundingBox.normalizedVertices[1].x;
-                                const height = obj.imageObjectDetection[0].boundingBox.normalizedVertices[1].y;
+                                const x = obj.imageObjectDetection.boundingBox.normalizedVertices[0].x;
+                                const y = obj.imageObjectDetection.boundingBox.normalizedVertices[0].y;
+                                const width = obj.imageObjectDetection.boundingBox.normalizedVertices[1].x;
+                                const height = obj.imageObjectDetection.boundingBox.normalizedVertices[1].y;
                                 return (
                                     <rect
                                         fill='black'
@@ -68,7 +68,7 @@ export const Evaluation: React.FC<IEvaluation> = (props: IEvaluation) => {
                                         width={width - x}
                                         height={height - y}
                                     >
-                                        <title>{`${obj.displayName}: ${Math.round(obj.imageObjectDetection[0].score * 100) / 100}`}</title>
+                                        <title>{`${obj.displayName}: ${Math.round(obj.imageObjectDetection.score * 100) / 100}`}</title>
                                     </rect>
                                 );
                             })

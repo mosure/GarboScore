@@ -12,7 +12,7 @@ export interface Evaluation {
 
 interface ClassificationObject {
     displayName: string;
-    imageObjectDetection: ImageObjectDetection[];
+    imageObjectDetection: ImageObjectDetection;
 }
 
 interface ImageObjectDetection {
@@ -39,83 +39,75 @@ export const evaluationData: Evaluation[] = [
         payload: [
             {
                 displayName: 'glass',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.06722600013017654,
-                                    y: 0.032620400190353394,
-                                },
-                                {
-                                    x: 0.38055700063705444,
-                                    y: 0.5402039885520935,
-                                },
-                            ],
-                        },
-                        score: 0.9684039950370789,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.06722600013017654,
+                                y: 0.032620400190353394,
+                            },
+                            {
+                                x: 0.38055700063705444,
+                                y: 0.5402039885520935,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.9684039950370789,
+                },
             },
             {
                 displayName: 'plastic',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.09706679731607437,
-                                    y: 0.5765519738197327,
-                                },
-                                {
-                                    x: 0.4439049959182739,
-                                    y: 0.9399960041046143,
-                                },
-                            ],
-                        },
-                        score: 0.9622189998626709,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.09706679731607437,
+                                y: 0.5765519738197327,
+                            },
+                            {
+                                x: 0.4439049959182739,
+                                y: 0.9399960041046143,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.9622189998626709,
+                },
             },
             {
                 displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.5343419909477234,
-                                    y: 0.49305999279022217,
-                                },
-                                {
-                                    x: 0.9125480055809021,
-                                    y: 0.9828130006790161,
-                                },
-                            ],
-                        },
-                        score: 0.7150440216064453,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.5343419909477234,
+                                y: 0.49305999279022217,
+                            },
+                            {
+                                x: 0.9125480055809021,
+                                y: 0.9828130006790161,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.7150440216064453,
+                },
             },
             {
                 displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.6127989888191223,
-                                    y: 0.04846449941396713,
-                                },
-                                {
-                                    x: 0.9485570192337036,
-                                    y: 0.5083829760551453,
-                                },
-                            ],
-                        },
-                        score: 0.5971580147743225,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.6127989888191223,
+                                y: 0.04846449941396713,
+                            },
+                            {
+                                x: 0.9485570192337036,
+                                y: 0.5083829760551453,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.5971580147743225,
+                },
             },
         ],
     },
@@ -126,84 +118,40 @@ export const evaluationData: Evaluation[] = [
         score: 4,
         payload: [
             {
-                displayName: 'glass',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.06722600013017654,
-                                    y: 0.032620400190353394,
-                                },
-                                {
-                                    x: 0.38055700063705444,
-                                    y: 0.5402039885520935,
-                                },
-                            ],
-                        },
-                        score: 0.9684039950370789,
+                displayName: 'plastic',
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.44532498717308044,
+                                y: 0.11859200149774551,
+                            },
+                            {
+                                x: 0.9058660268783569,
+                                y: 0.6814090013504028,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.9509289860725403,
+                },
             },
             {
                 displayName: 'plastic',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.09706679731607437,
-                                    y: 0.5765519738197327,
-                                },
-                                {
-                                    x: 0.4439049959182739,
-                                    y: 0.9399960041046143,
-                                },
-                            ],
-                        },
-                        score: 0.9622189998626709,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.4616439938545227,
+                                y: 0.7294089794158936,
+                            },
+                            {
+                                x: 0.9503229856491089,
+                                y: 0.9441850185394287,
+                            },
+                        ],
                     },
-                ],
-            },
-            {
-                displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.5343419909477234,
-                                    y: 0.49305999279022217,
-                                },
-                                {
-                                    x: 0.9125480055809021,
-                                    y: 0.9828130006790161,
-                                },
-                            ],
-                        },
-                        score: 0.7150440216064453,
-                    },
-                ],
-            },
-            {
-                displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.6127989888191223,
-                                    y: 0.04846449941396713,
-                                },
-                                {
-                                    x: 0.9485570192337036,
-                                    y: 0.5083829760551453,
-                                },
-                            ],
-                        },
-                        score: 0.5971580147743225,
-                    },
-                ],
+                    score: 0.7237169742584229,
+                },
             },
         ],
     },
@@ -215,83 +163,75 @@ export const evaluationData: Evaluation[] = [
         payload: [
             {
                 displayName: 'glass',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.06722600013017654,
-                                    y: 0.032620400190353394,
-                                },
-                                {
-                                    x: 0.38055700063705444,
-                                    y: 0.5402039885520935,
-                                },
-                            ],
-                        },
-                        score: 0.9684039950370789,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.06722600013017654,
+                                y: 0.032620400190353394,
+                            },
+                            {
+                                x: 0.38055700063705444,
+                                y: 0.5402039885520935,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.9684039950370789,
+                },
             },
             {
                 displayName: 'plastic',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.09706679731607437,
-                                    y: 0.5765519738197327,
-                                },
-                                {
-                                    x: 0.4439049959182739,
-                                    y: 0.9399960041046143,
-                                },
-                            ],
-                        },
-                        score: 0.9622189998626709,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.09706679731607437,
+                                y: 0.5765519738197327,
+                            },
+                            {
+                                x: 0.4439049959182739,
+                                y: 0.9399960041046143,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.9622189998626709,
+                },
             },
             {
                 displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.5343419909477234,
-                                    y: 0.49305999279022217,
-                                },
-                                {
-                                    x: 0.9125480055809021,
-                                    y: 0.9828130006790161,
-                                },
-                            ],
-                        },
-                        score: 0.7150440216064453,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.5343419909477234,
+                                y: 0.49305999279022217,
+                            },
+                            {
+                                x: 0.9125480055809021,
+                                y: 0.9828130006790161,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.7150440216064453,
+                },
             },
             {
                 displayName: 'metal',
-                imageObjectDetection: [
-                    {
-                        boundingBox: {
-                            normalizedVertices: [
-                                {
-                                    x: 0.6127989888191223,
-                                    y: 0.04846449941396713,
-                                },
-                                {
-                                    x: 0.9485570192337036,
-                                    y: 0.5083829760551453,
-                                },
-                            ],
-                        },
-                        score: 0.5971580147743225,
+                imageObjectDetection: {
+                    boundingBox: {
+                        normalizedVertices: [
+                            {
+                                x: 0.6127989888191223,
+                                y: 0.04846449941396713,
+                            },
+                            {
+                                x: 0.9485570192337036,
+                                y: 0.5083829760551453,
+                            },
+                        ],
                     },
-                ],
+                    score: 0.5971580147743225,
+                },
             },
         ],
     },
