@@ -5,6 +5,7 @@ import {
     Grid,
     Box,
     Typography,
+    Paper,
 } from '@material-ui/core';
 
 import { timelineData } from '../data';
@@ -22,8 +23,13 @@ const useStyles = makeStyles(
         snapshotHeader: {
             color: theme.palette.text.hint,
         },
+        paper: {
+            padding: 32,
+            borderRadius: 12,
+        },
         image: {
             height: 300,
+            margin: 'auto',
         },
         hr: {
             display: 'flex',
@@ -111,30 +117,51 @@ export const Timeline: React.FC = () => {
                                 </Box>
                                 <Grid
                                     container
+                                    alignItems='center'
                                     direction={(index % 2 === 0) ? 'row' : 'row-reverse'}
                                     spacing={4}
                                 >
-                                    <Grid item>
-                                        {
-                                            (snapshot.element) && snapshot.element()
-                                        }
-                                        {
-                                            (snapshot.description) && (
-                                                <Typography
-                                                    variant='body1'
-                                                    align={(index % 2 === 0) ? 'right' : 'left'}
-                                                >
-                                                    {snapshot.description}
-                                                </Typography>
-                                            )
-                                        }
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                    >
+                                        <Paper
+                                            className={classes.paper}
+                                            elevation={8}
+                                        >
+                                            {
+                                                (snapshot.element) && snapshot.element()
+                                            }
+                                            {
+                                                (snapshot.description) && (
+                                                    <Typography
+                                                        variant='body1'
+                                                        align={(index % 2 === 0) ? 'right' : 'left'}
+                                                    >
+                                                        {snapshot.description}
+                                                    </Typography>
+                                                )
+                                            }
+                                        </Paper>
                                     </Grid>
-                                    <Grid item>
-                                        <img
-                                            src={snapshot.image.imgSrc}
-                                            alt={snapshot.image.imgAlt}
-                                            className={classes.image}
-                                        />
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                    >
+                                        <Grid
+                                            container
+                                            justify='center'
+                                        >
+                                            <Grid item>
+                                                <img
+                                                    src={snapshot.image.imgSrc}
+                                                    alt={snapshot.image.imgAlt}
+                                                    className={classes.image}
+                                                />
+                                            </Grid>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
                             </Grid>
