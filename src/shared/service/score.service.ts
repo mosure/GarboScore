@@ -20,7 +20,7 @@ export const computeScore = (submission: ScoreBody): Promise<ScoreResult> => {
 
         // get a callback when the server responds
         xhr.addEventListener('load', () => {
-            resolve(xhr.response);
+            resolve(JSON.parse(xhr.response));
         });
 
         xhr.addEventListener('error', () => {
@@ -46,7 +46,7 @@ export const getAddresses = (skip?: number, limit?: number): Promise<AddressResu
 
         // get a callback when the server responds
         xhr.addEventListener('load', () => {
-            resolve(xhr.response);
+            resolve(JSON.parse(xhr.response));
         });
 
         xhr.addEventListener('error', () => {
