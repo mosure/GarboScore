@@ -265,7 +265,7 @@ export const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                         <Grid item className={classes.customViewer}>
-                            <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
+                            <Box p={4} boxShadow={8} borderColor='secondary.main' borderRadius={16} border={1}>
                                 <EvalComp {...state.evaluation}/>
                                 <Typography
                                         variant='body1'

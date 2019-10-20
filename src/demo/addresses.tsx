@@ -84,7 +84,7 @@ export const Addresses: React.FC = () => {
 
     return (
         <>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={8}>
                 <Grid container justify='space-between'>
                     <Grid item>
                         <Typography variant='h4'>
