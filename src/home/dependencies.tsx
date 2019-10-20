@@ -16,6 +16,7 @@ const useStyles = makeStyles(
             margin: 'auto',
             marginBottom: 40,
             userSelect: 'none',
+            color: theme.palette.text.hint,
         },
     }),
 );
