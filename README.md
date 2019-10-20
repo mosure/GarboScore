@@ -14,7 +14,7 @@ We used Google AutoML to detect common recyclable items in an 'x-ray' styled ima
 ## Technologies
 
 ### Google Cloud Platform
-We utilzed Cloud Build, and Cloud Build triggeres to setup the build pipeline for our web app, as well as for our Cloud Functions. Our machine learning models were trained using Cloud AutoML. Furthermore, we used Google Analytics to track page views, and event interactions.
+We utilzed Cloud Build, and Cloud Build triggers to setup the build pipeline for our web app, as well as for our Cloud Functions. Our machine learning models were trained using Cloud AutoML. Furthermore, we used Google Analytics to track page views, and event interactions.
 
 ### Google Firebase
 Our web app is hosted on the Google Firebase CDN.
