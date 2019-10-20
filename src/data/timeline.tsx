@@ -28,25 +28,44 @@ export const timelineData: Timeline = {
     header: 'How It Works',
     snapshots: [
         {
-            header: 'Trash',
-            description: '',
+            header: 'Take out the trash',
+            description: `
+                Our process starts when you, the homeowner, takes your trash to the curb.
+                Does your trash can only contain landfill suitable items? GarboScore analyzes
+                the material contents of your garbage upon collection and keeps you up to date
+                on your recycling habits. All of this is not without reward, continue reading
+                to understand how GarboScore could also incentivize recycling.
+            `,
             image: {
                 imgSrc: trash,
                 imgAlt: 'Taking out the trash',
             },
         },
         {
-            header: 'Garbage Truck/X-Ray',
-            description: '',
+            header: 'Garbage Trucks and Baggage',
+            description: `
+                Our process depends on a method of analysis to pick out recyclable items
+                from normal trash. We detail a multi-axis X-ray scanner inside of the
+                pre-compressed holding area of garbage trucks. This system could be retrofit or
+                built on new models. The X-rays would be safe, contained, and would provide outlines
+                and material analysis of the garbage. Analyzing the X-ray images with advanced machine
+                learning models would provide a detailed account of recyclable items. A system such as this
+                is proved to be feasible by current TSA baggage X-ray implementations, using machine learning
+                models in a similar fashion.
+            `,
             image: {
                 imgSrc: garbagetruck,
                 imgAlt: 'Garbage truck collects the garbage',
             },
         },
         {
-            header: 'ML/object dection',
+            header: 'Machine Learning Analysis',
             description: `
-
+                Our machine learning pipeline utilizes Google Cloud Platform's AutoML Vision Object Detection
+                to locate and classify recyclable items in images. The core system would be identical to the production
+                implementation apart from the training set. Our current system details a proof of concept to show
+                that shape detection of recyclable items is possible. A more advanced system would take into consideration
+                multi-spectrum images from different axes.
             `,
             image: {
                 imgSrc: processing,
@@ -54,7 +73,7 @@ export const timelineData: Timeline = {
             },
         },
         {
-            header: 'Garbage scoring/location',
+            header: 'Scoring Your Garbage',
             description: `
                 After processing the contents of garbage containers, our system tracks the household
                 the garbage came from along with an immediate score for that container. The score is
@@ -72,7 +91,8 @@ export const timelineData: Timeline = {
             description: `
                 Our platform allows for external querying, via web API, of households and performs aggregations of scores
                 to provide accurate scores over time. These reports can be used by communities to further policy and
-                show recycling progress.
+                show recycling progress. The scores can also be accessed via our mobile app where you can view your
+                garbage report in realtime.
             `,
             image: {
                 imgSrc: report,
@@ -80,7 +100,7 @@ export const timelineData: Timeline = {
             },
         },
         {
-            header: 'What are the incentives?',
+            header: 'What are the Incentives?',
             description: `
                 If a community decides to implement GarboScore, providing some form of incentivization
                 would encourage the positive change of proper recycling. This incentivization could be either
