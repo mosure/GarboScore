@@ -97,13 +97,15 @@ export const score = functions.https.onRequest((request, response) => {
             const collection = db.collection(COLLECTION_NAME);
 
             collection.findOne({ address: request.body.address }).then((existing) => {
+                const timestamp = Date.now();
+
                 if (existing) {
                     collection.updateOne({
                         address: request.body.address,
                     }, {
                         '$addToSet': {
                             evaluations: {
-                                timestamp: Date.now(),
+                                timestamp,
                                 score: submissionScore,
                                 //result: results,
                             },
@@ -116,7 +118,7 @@ export const score = functions.https.onRequest((request, response) => {
                         address: request.body.address,
                         evaluations: [
                             {
-                                timestamp: Date.now(),
+                                timestamp,
                                 score: submissionScore,
                                 //result: results,
                             },
