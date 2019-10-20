@@ -130,6 +130,7 @@ export const Demo: React.FC = () => {
                     >
                         {demoData.description}
                     </Typography>
+                    <Presets/>
                     <Grid
                         container
                         direction='column'
@@ -154,7 +155,6 @@ export const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                     </Grid>
-                    <Presets/>
                 </Container>
             </Box>
             <Snackbar
