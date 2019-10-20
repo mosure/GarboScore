@@ -137,7 +137,7 @@ export const Timeline: React.FC = () => {
                                                 (snapshot.description) && (
                                                     <Typography
                                                         variant='body1'
-                                                        align={(index % 2 === 0) ? 'right' : 'left'}
+                                                        align='left'
                                                     >
                                                         {snapshot.description}
                                                     </Typography>
