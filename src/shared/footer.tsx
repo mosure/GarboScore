@@ -44,13 +44,13 @@ const Footer: React.FC = () => {
             <Grid item>
                 <Typography className={classes.consoleFont} variant='body2'>
                     Built by {' '}
-                    <Link color='secondary' href='https://blenz.dev'>
+                    <Link color='secondary' href='https://blenz.dev' target='_blank'>
                         {'Brady Lenz'}
                     </Link>
                     {' '}
                     and
                     {' '}
-                    <Link color='secondary' href='https://mitchell.mosure.me'>
+                    <Link color='secondary' href='https://mitchell.mosure.me' target='_blank'>
                         {'Mitchell Mosure'}
                     </Link>
                 </Typography>

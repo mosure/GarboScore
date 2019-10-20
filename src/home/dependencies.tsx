@@ -5,6 +5,7 @@ import {
     Typography,
     makeStyles,
     createStyles,
+    Link,
 } from '@material-ui/core';
 
 import { dependencyData } from '../data';
@@ -48,10 +49,12 @@ export const Dependencies: React.FC = () => {
                                 item
                                 key={index}
                             >
-                                <img
-                                    src={dependency.imgSrc}
-                                    alt={dependency.imgAlt}
-                                />
+                                <Link href={dependency.link} target='_blank'>
+                                    <img
+                                        src={dependency.imgSrc}
+                                        alt={dependency.imgAlt}
+                                    />
+                                </Link>
                             </Grid>
                         );
                     })
