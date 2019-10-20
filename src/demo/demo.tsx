@@ -106,7 +106,7 @@ const Demo: React.FC = () => {
                         <Grid item>
                             <ImagePicker
                                 extensions={['jpg', 'jpeg', 'png']}
-                                dims={{minWidth: 100, maxWidth: 500, minHeight: 100, maxHeight: 500}}
+                                dims={{minWidth: 100, maxWidth: 1000, minHeight: 100, maxHeight: 1000}}
                                 onChange={fileConfirmed}
                                 onError={fileError}
                             >
