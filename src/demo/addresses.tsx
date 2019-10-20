@@ -24,6 +24,7 @@ const useStyles = makeStyles(
             width: '100%',
             marginBottom: theme.spacing(2),
             padding: 16,
+            marginTop: theme.spacing(4),
         },
         tableWrapper: {
             overflowX: 'auto',
