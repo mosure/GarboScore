@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions';
 import { MongoClient, Db } from 'mongodb';
-const vision = require('@google-cloud/vision');
+const automl = require('@google-cloud/automl');
 
 const MONGODB_URL: string = process.env.MONGODB_URL || '';
 const MONGODB_NAME: string = process.env.MONGODB_NAME || '';
@@ -11,7 +11,7 @@ const PROJECT_NAME: string = process.env.GCP_PROJECT_NAME || '';
 const REGION = process.env.GCP_REGION || '';
 const AUTO_ML_MODEL = process.env.AUTO_ML_MODEL || '';
 
-const predictionClient = new vision.PredictionServiceClient();
+const predictionClient = new automl.PredictionServiceClient();
 
 const mongoClient = new MongoClient(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
