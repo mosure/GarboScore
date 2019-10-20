@@ -12,6 +12,7 @@ import {
     Snackbar,
     IconButton,
     SnackbarContent,
+    TextField,
 } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { ImagePicker } from 'react-file-picker';
@@ -67,6 +68,9 @@ const useStyles = makeStyles(
             height: '400px',
             marginBottom: 15,
         },
+        textField: {
+            width: 200,
+        },
     }),
 );
 
@@ -89,6 +93,16 @@ export const Demo: React.FC = () => {
     const [state, setState] = useState({
         evaluation: initializer,
     });
+
+    const [addressObj, setAddressObj] = useState({
+        address: '',
+    });
+
+    const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setAddressObj({
+            address: event.target.value,
+        });
+    };
 
     const fileConfirmed = (base64: string) => {
         const address = 'TEST';
@@ -172,6 +186,16 @@ export const Demo: React.FC = () => {
                         spacing={4}
                         className={classes.container}
                     >
+                        <Grid item>
+                            <TextField
+                                id='standard-name'
+                                label='Name'
+                                className={classes.textField}
+                                value={addressObj.address}
+                                onChange={handleAddressChange}
+                                margin='normal'
+                            />
+                        </Grid>
                         <Grid item>
                             <ImagePicker
                                 extensions={['jpg', 'jpeg', 'png']}
