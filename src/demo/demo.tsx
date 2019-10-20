@@ -56,10 +56,6 @@ const useStyles = makeStyles(
         customViewer: {
             height: '400px',
         },
-        viewerPlaceholder: {
-            height: '100%',
-            width: '400px',
-        },
     }),
 );
 
@@ -130,6 +126,14 @@ export const Demo: React.FC = () => {
             snackBarOpen: false,
             snackBarMessage: '',
         });
+
+        const evalObj = state.evaluation;
+
+        evalObj.isLoaded = true;
+
+        setState({
+            evaluation: evalObj,
+        });
     };
 
     return (
@@ -179,7 +183,9 @@ export const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                         <Grid item className={classes.customViewer}>
-                            <EvalComp {...state.evaluation}/>
+                            <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
+                                <EvalComp {...state.evaluation}/>
+                            </Box>
                         </Grid>
                     </Grid>
                     <Addresses/>
