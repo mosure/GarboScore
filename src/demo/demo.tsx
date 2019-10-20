@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactGA from 'react-ga';
 import {
     Box,
     Toolbar,
@@ -21,6 +22,14 @@ import { Presets } from './';
 import { Evaluation } from '../data/demo/scores';
 import { Addresses } from './addresses';
 import { Evaluation as EvalComp } from './evaluation';
+
+const logUploadButton = () => {
+    ReactGA.event({
+        category: 'Button',
+        action: 'Upload Image',
+        label: 'Demo',
+    });
+};
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -56,6 +65,7 @@ const useStyles = makeStyles(
         },
         customViewer: {
             height: '400px',
+            marginBottom: 15,
         },
     }),
 );
@@ -173,6 +183,7 @@ export const Demo: React.FC = () => {
                                     variant='outlined'
                                     color='secondary'
                                     size='large'
+                                    onClick={logUploadButton}
                                 >
                                     Upload Image
                                 </Button>
@@ -181,6 +192,12 @@ export const Demo: React.FC = () => {
                         <Grid item className={classes.customViewer}>
                             <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
                                 <EvalComp {...state.evaluation}/>
+                                <Typography
+                                        variant='body1'
+                                        align='center'
+                                >
+                                    {`Score: ${state.evaluation.score}`}
+                                </Typography>
                             </Box>
                         </Grid>
                     </Grid>
