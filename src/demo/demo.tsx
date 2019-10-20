@@ -188,6 +188,7 @@ export const Demo: React.FC = () => {
                                     variant='outlined'
                                     color='secondary'
                                     size='large'
+                                    onClick={logUploadButton}
                                 >
                                     Upload Image
                                 </Button>

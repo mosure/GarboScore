@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ReactGA from 'react-ga';
 import {
     Paper,
     Table,
@@ -59,6 +60,15 @@ export const Addresses: React.FC = () => {
         }).catch();
     };
 
+    const logRefreshButton = () => {
+        ReactGA.event({
+            category: 'Button',
+            action: 'Refresh',
+            label: 'Table',
+        });
+        refreshTableData();
+    };
+
     useEffect(() => {
         refreshTableData();
     }, []);
@@ -82,7 +92,7 @@ export const Addresses: React.FC = () => {
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <IconButton color='secondary' onClick={refreshTableData}>
+                        <IconButton color='secondary' onClick={logRefreshButton}>
                             <Refresh/>
                         </IconButton>
                     </Grid>
