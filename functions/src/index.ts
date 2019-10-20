@@ -8,8 +8,8 @@ const MONGODB_NAME: string = process.env.MONGODB_NAME || '';
 const COLLECTION_NAME = 'addresses';
 
 const PROJECT_NAME: string = process.env.GCP_PROJECT_NAME || '';
-const REGION = process.env.GCP_REGION || '';
-const AUTO_ML_MODEL = process.env.AUTO_ML_MODEL || '';
+const REGION: string = process.env.GCP_REGION || '';
+const AUTO_ML_MODEL: string = process.env.AUTO_ML_MODEL || '';
 
 const predictionClient = new automl.PredictionServiceClient();
 
