@@ -14,6 +14,7 @@ import { ImagePicker } from 'react-file-picker';
 
 import { demoData } from '../data';
 import { computeScore, ScoreResult } from '../shared/service';
+import { Presets } from './';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -39,7 +40,7 @@ const useStyles = makeStyles(
     }),
 );
 
-const Demo: React.FC = () => {
+export const Demo: React.FC = () => {
     const classes = useStyles();
     const [state, setState] = useState({
         snackBarOpen: false,
@@ -120,6 +121,7 @@ const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                     </Grid>
+                    <Presets/>
                 </Container>
             </Box>
             <Snackbar
@@ -138,5 +140,3 @@ const Demo: React.FC = () => {
         </>
     );
 };
-
-export default Demo;

@@ -1,4 +1,4 @@
-interface Evaluation {
+export interface Evaluation {
     imgSrc: string;
     imgAlt: string;
     payload: ClassificationObject[];
