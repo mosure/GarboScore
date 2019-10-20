@@ -110,7 +110,7 @@ export const score = functions.https.onRequest((request, response) => {
                             },
                         },
                     }).then(() => {
-                        response.status(202).send({ score: submissionScore });
+                        response.status(202).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err }));
                 } else {
                     collection.insertOne({
@@ -123,7 +123,7 @@ export const score = functions.https.onRequest((request, response) => {
                             },
                         ],
                     }).then(() => {
-                        response.status(201).send({ score: results });
+                        response.status(201).send({ score: submissionScore, result: results, });
                     }).catch((err) => response.status(500).send({ error: err }));
                 }
             }).catch((err) => response.status(500).send({ error: err }));

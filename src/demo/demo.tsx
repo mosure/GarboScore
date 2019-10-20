@@ -16,9 +16,10 @@ import { Close } from '@material-ui/icons';
 import { ImagePicker } from 'react-file-picker';
 
 import { demoData } from '../data';
-import { computeScore, ScoreResult } from '../shared/service';
+import { computeScore } from '../shared/service';
 import { Presets } from './';
 import { Evaluation } from '../data/demo/scores';
+import { Addresses } from './addresses';
 
 const useStyles = makeStyles(
     (theme) => createStyles({
@@ -61,6 +62,7 @@ export const Demo: React.FC = () => {
         imgSrc: '',
         isLoaded: false,
         payload: [],
+        score: 0,
     };
 
     const [state, setState] = useState({
@@ -70,35 +72,32 @@ export const Demo: React.FC = () => {
     });
 
     const fileConfirmed = (base64: string) => {
+        const address = 'TEST';
+
         computeScore({
-            address: 'TEST',
-            callback: (result?: ScoreResult) => {
-                if (!result) {
-                    snackbarError('Error Processing Image.');
-                    return;
-                }
-
-                if (!result.result || result.result.length === 0) {
-                    snackbarError('Error Processing Image.');
-                    return;
-                }
-
-                // Set state to the correct response with image
-                const evaluation: Evaluation = {
-                    imgAlt: '',
-                    imgSrc: base64,
-                    isLoaded: false,
-                    payload: result.result[0],
-                };
-
-                setState({
-                    snackBarOpen: false,
-                    snackBarMessage: '',
-                    evaluation,
-                });
-            },
+            address,
             image: base64.split(',')[1], // Strip out the type
-        });
+        }).then((result) => {
+            if (!result.result || result.result.length === 0) {
+                snackbarError('Error Processing Image.');
+                return;
+            }
+
+            // Set state to the correct response with image
+            const evaluation: Evaluation = {
+                imgAlt: address,
+                imgSrc: base64,
+                isLoaded: false,
+                payload: result.result[0],
+                score: result.score,
+            };
+
+            setState({
+                snackBarOpen: false,
+                snackBarMessage: '',
+                evaluation,
+            });
+        }).catch(() => snackbarError('Error Processing Image.'));
     };
 
     const snackbarError = (error: string) => {
@@ -139,6 +138,7 @@ export const Demo: React.FC = () => {
                     >
                         {demoData.description}
                     </Typography>
+                    <Presets/>
                     <Grid
                         container
                         direction='column'
@@ -163,7 +163,7 @@ export const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                     </Grid>
-                    <Presets/>
+                    <Addresses/>
                 </Container>
             </Box>
             <Snackbar

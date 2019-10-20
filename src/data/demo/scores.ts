@@ -5,6 +5,7 @@ export interface Evaluation {
     imgAlt: string;
     payload: ClassificationObject[];
     isLoaded: boolean;
+    score: number;
 }
 
 interface ClassificationObject {
@@ -32,6 +33,7 @@ export const evaluationData: Evaluation[] = [
         imgSrc: example1.default,
         imgAlt: 'Example 1',
         isLoaded: true,
+        score: 4,
         payload: [
             {
                 displayName: 'glass',
