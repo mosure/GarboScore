@@ -70,6 +70,49 @@ const useStyles = makeStyles(
         },
         textField: {
             width: 200,
+            color: theme.palette.secondary.main,
+        },
+        header: {
+            color: theme.palette.text.hint,
+        },
+        hr: {
+            marginTop: '96px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            whiteSpace: 'nowrap',
+            margin: 'auto',
+            marginBottom: 32,
+            '&::before': {
+                backgroundColor: theme.palette.text.hint,
+                content: '""',
+                display: 'block',
+                height: 2,
+                position: 'relative',
+                verticalAlign: 'middle',
+                width: 100,
+                maxWidth: 200,
+                marginRight: 10,
+                top: 3,
+                [theme.breakpoints.down('sm')]: {
+                    width: '100%',
+                },
+            },
+            '&::after': {
+                backgroundColor: theme.palette.text.hint,
+                content: '""',
+                display: 'block',
+                height: 2,
+                position: 'relative',
+                verticalAlign: 'middle',
+                width: 100,
+                maxWidth: 200,
+                marginLeft: 10,
+                top: 3,
+                [theme.breakpoints.down('sm')]: {
+                    width: '100%',
+                },
+            },
         },
     }),
 );
@@ -177,6 +220,15 @@ export const Demo: React.FC = () => {
                         {demoData.description}
                     </Typography>
                     <Presets/>
+                    <Box className={classes.hr}>
+                        <Typography
+                            variant='h3'
+                            align='center'
+                            className={classes.header}
+                        >
+                            Upload Your Own
+                        </Typography>
+                    </Box>
                     <Grid
                         container
                         direction='column'
@@ -213,7 +265,7 @@ export const Demo: React.FC = () => {
                             </ImagePicker>
                         </Grid>
                         <Grid item className={classes.customViewer}>
-                            <Box p={4} borderColor='secondary.main' borderRadius={16} border={1}>
+                            <Box p={4} boxShadow={8} borderColor='secondary.main' borderRadius={16} border={1}>
                                 <EvalComp {...state.evaluation}/>
                                 <Typography
                                         variant='body1'

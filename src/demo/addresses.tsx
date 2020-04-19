@@ -24,6 +24,7 @@ const useStyles = makeStyles(
             width: '100%',
             marginBottom: theme.spacing(2),
             padding: 16,
+            marginTop: theme.spacing(4),
         },
         tableWrapper: {
             overflowX: 'auto',
@@ -84,7 +85,7 @@ export const Addresses: React.FC = () => {
 
     return (
         <>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} elevation={8}>
                 <Grid container justify='space-between'>
                     <Grid item>
                         <Typography variant='h4'>
